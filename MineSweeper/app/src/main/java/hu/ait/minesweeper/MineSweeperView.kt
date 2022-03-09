@@ -103,11 +103,11 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     public fun changeFlagOn() {
-        MineSweeperModel.flagOn =  true
+        MineSweeperModel.flagOn = true
     }
 
     public fun changeFlagOff() {
-        MineSweeperModel.flagOn =  false
+        MineSweeperModel.flagOn = false
     }
 
 }

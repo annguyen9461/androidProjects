@@ -64,7 +64,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                 if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CIRCLE) {
                     val centerX = (i * width / 5 + width / 15).toFloat()
                     val centerY = (j * height / 5 + height / 15).toFloat()
-                    val radius = height / 15 - 2
+                    val radius = height / 15
 
                     canvas.drawCircle(centerX, centerY, radius.toFloat(), paintLine)
                 } else if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CROSS) {
@@ -85,7 +85,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             val tX = event.x.toInt() / (width / 5)
             val tY = event.y.toInt() / (height / 5)
 
-            if (tX < 3 && tY < 3 && MineSweeperModel.getFieldContent(tX, tY) ==
+            if (tX < 5 && tY < 5 && MineSweeperModel.getFieldContent(tX, tY) ==
                 MineSweeperModel.EMPTY) {
                 MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.getNextPlayer())
                 MineSweeperModel.changeNextPlayer()

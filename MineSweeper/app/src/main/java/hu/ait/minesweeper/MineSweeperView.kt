@@ -62,9 +62,9 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
         for (i in 0..4) {
             for (j in 0..4) {
                 if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CIRCLE) {
-                    val centerX = (i * width / 5 + width / 15).toFloat()
-                    val centerY = (j * height / 5 + height / 15).toFloat()
-                    val radius = height / 15
+                    val centerX = (i * width / 5 + width / 10).toFloat()
+                    val centerY = (j * height / 5 + height / 10).toFloat()
+                    val radius = height / 10
 
                     canvas.drawCircle(centerX, centerY, radius.toFloat(), paintLine)
                 } else if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CROSS) {

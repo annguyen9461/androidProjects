@@ -98,6 +98,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     public fun resetGame() {
+
         invalidate()
     }
 

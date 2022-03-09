@@ -14,15 +14,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var flagOn = false
+//        var flagOn = false
+//
+//        binding.toggleFlag.setOnClickListener {
+//            if (flagOn == false) {
+//                flagOn = true
+//            } else {
+//                flagOn = false
+//            }
+//            println(flagOn)
+//        }
 
-        binding.toggleFlag.setOnClickListener {
-            if (flagOn == false) {
-                flagOn = true
-            } else {
-                flagOn = false
-            }
-            println(flagOn)
+        binding.btnReset.setOnClickListener {
+            binding.mineSweeperView.resetGame()
         }
 
     }
@@ -35,5 +39,6 @@ class MainActivity : AppCompatActivity() {
     public fun isFlagModeOn() : Boolean {
         return binding.toggleFlag.isChecked
     }
+
 
 }

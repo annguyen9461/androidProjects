@@ -23,7 +23,6 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
         paintLine.strokeWidth = 5f
     }
 
-
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
@@ -56,5 +55,8 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
 
     }
 
+    public fun resetGame() {
+        invalidate()
+    }
 
 }

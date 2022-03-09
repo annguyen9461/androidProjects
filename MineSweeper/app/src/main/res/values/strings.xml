@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MineSweeper</string>
+    <string name="flag_mode">FLAG MODE</string>
+    <string name="step_mode">STEP MODE</string>
+</resources>

@@ -10,13 +10,13 @@ import android.view.View
 
 class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
-    private lateinit var paintBackgorund: Paint
+    private lateinit var paintBackground: Paint
     private lateinit var paintLine: Paint
 
     init {
-        paintBackgorund = Paint()
-        paintBackgorund.color = Color.BLACK
-        paintBackgorund.style = Paint.Style.FILL
+        paintBackground = Paint()
+        paintBackground.color = Color.BLACK
+        paintBackground.style = Paint.Style.FILL
 
         paintLine = Paint()
         paintLine.color = Color.WHITE
@@ -29,7 +29,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
 
         canvas?.drawRect(
             0f, 0f, width.toFloat(),
-            height.toFloat(), paintBackgorund
+            height.toFloat(), paintBackground
         )
 
         drawGameArea(canvas!!)
@@ -100,6 +100,14 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     public fun resetGame() {
         MineSweeperModel.resetModel()
         invalidate()
+    }
+
+    public fun changeFlagOn() {
+        MineSweeperModel.flagOn =  true
+    }
+
+    public fun changeFlagOff() {
+        MineSweeperModel.flagOn =  false
     }
 
 }

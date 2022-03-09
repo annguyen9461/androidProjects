@@ -1,10 +1,14 @@
 package hu.ait.minesweeper
 
+import kotlin.math.log
+
 object MineSweeperModel {
     public val EMPTY: Short = 0
     public val CIRCLE: Short = 1
     public val CROSS: Short = 2
     public val MINE: Short = 1
+
+    public var flagOn = false
 
     private val model = arrayOf(
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
@@ -42,6 +46,8 @@ object MineSweeperModel {
     fun getNextPlayer() = nextPlayer
 
     fun changeNextPlayer() {
-        nextPlayer = if (nextPlayer == CIRCLE) CROSS else CIRCLE
+        nextPlayer = if (flagOn) CROSS else CIRCLE
     }
+
+
 }

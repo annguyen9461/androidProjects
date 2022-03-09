@@ -4,12 +4,21 @@ object MineSweeperModel {
     public val EMPTY: Short = 0
     public val CIRCLE: Short = 1
     public val CROSS: Short = 2
+    public val MINE: Short = 3
 
     private val model = arrayOf(
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
+        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY)
+    )
+
+    private val mine_placement = arrayOf(
+        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
+        shortArrayOf(EMPTY, EMPTY, EMPTY, MINE, EMPTY),
+        shortArrayOf(EMPTY, EMPTY, MINE, EMPTY, EMPTY),
+        shortArrayOf(MINE, EMPTY, EMPTY, EMPTY, EMPTY),
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY)
     )
 

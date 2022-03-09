@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 
 class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
@@ -32,15 +33,17 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
         )
 
         drawGameArea(canvas!!)
+        drawPlayers(canvas!!)
     }
 
     private fun drawGameArea(canvas: Canvas) {
         // border
         canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paintLine)
+
         // four horizontal lines
         for (i in 1..4) {
             canvas.drawLine(
-                0f, (i * height / 5).toFloat(), width.toFloat(), (i* height / 5).toFloat(),
+                0f, (i * height / 5).toFloat(), width.toFloat(), (i * height / 5).toFloat(),
                 paintLine
             )
         }
@@ -53,6 +56,45 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             )
         }
 
+    }
+
+    private fun drawPlayers(canvas: Canvas) {
+        for (i in 0..2) {
+            for (j in 0..2) {
+                if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CIRCLE) {
+                    val centerX = (i * width / 3 + width / 6).toFloat()
+                    val centerY = (j * height / 3 + height / 6).toFloat()
+                    val radius = height / 6 - 2
+
+                    canvas.drawCircle(centerX, centerY, radius.toFloat(), paintLine)
+                } else if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CROSS) {
+                    canvas.drawLine((i * width / 3).toFloat(), (j * height / 3).toFloat(),
+                        ((i + 1) * width / 3).toFloat(),
+                        ((j + 1) * height / 3).toFloat(), paintLine)
+
+                    canvas.drawLine(((i + 1) * width / 3).toFloat(), (j * height / 3).toFloat(),
+                        (i * width / 3).toFloat(), ((j + 1) * height / 3).toFloat(), paintLine)
+                }
+            }
+        }
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (event?.action == MotionEvent.ACTION_DOWN) {
+
+            val tX = event.x.toInt() / (width / 3)
+            val tY = event.y.toInt() / (height / 3)
+
+            if (tX < 3 && tY < 3 && MineSweeperModel.getFieldContent(tX, tY) ==
+                MineSweeperModel.EMPTY) {
+                MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.getNextPlayer())
+                MineSweeperModel.changeNextPlayer()
+                invalidate()
+            }
+
+        }
+
+        return true
     }
 
     public fun resetGame() {

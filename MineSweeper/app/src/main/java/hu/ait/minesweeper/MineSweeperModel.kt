@@ -8,16 +8,16 @@ object MineSweeperModel {
     private val model = arrayOf(
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
-//        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
-//        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
+        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
+        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY)
     )
 
     private var nextPlayer = CIRCLE.toShort()
 
     fun resetModel() {
-        for (i in 0..2) {
-            for (j in 0..2) {
+        for (i in 0..4) {
+            for (j in 0..4) {
                 model[i][j] = EMPTY
             }
         }

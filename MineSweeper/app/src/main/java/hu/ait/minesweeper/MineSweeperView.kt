@@ -59,21 +59,21 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     private fun drawPlayers(canvas: Canvas) {
-        for (i in 0..2) {
-            for (j in 0..2) {
+        for (i in 0..4) {
+            for (j in 0..4) {
                 if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CIRCLE) {
-                    val centerX = (i * width / 3 + width / 6).toFloat()
-                    val centerY = (j * height / 3 + height / 6).toFloat()
-                    val radius = height / 6 - 2
+                    val centerX = (i * width / 5 + width / 15).toFloat()
+                    val centerY = (j * height / 5 + height / 15).toFloat()
+                    val radius = height / 15 - 2
 
                     canvas.drawCircle(centerX, centerY, radius.toFloat(), paintLine)
                 } else if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CROSS) {
-                    canvas.drawLine((i * width / 3).toFloat(), (j * height / 3).toFloat(),
-                        ((i + 1) * width / 3).toFloat(),
-                        ((j + 1) * height / 3).toFloat(), paintLine)
+                    canvas.drawLine((i * width / 5).toFloat(), (j * height / 5).toFloat(),
+                        ((i + 1) * width / 5).toFloat(),
+                        ((j + 1) * height / 5).toFloat(), paintLine)
 
-                    canvas.drawLine(((i + 1) * width / 3).toFloat(), (j * height / 3).toFloat(),
-                        (i * width / 3).toFloat(), ((j + 1) * height / 3).toFloat(), paintLine)
+                    canvas.drawLine(((i + 1) * width / 5).toFloat(), (j * height / 5).toFloat(),
+                        (i * width / 5).toFloat(), ((j + 1) * height / 5).toFloat(), paintLine)
                 }
             }
         }
@@ -82,8 +82,8 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (event?.action == MotionEvent.ACTION_DOWN) {
 
-            val tX = event.x.toInt() / (width / 3)
-            val tY = event.y.toInt() / (height / 3)
+            val tX = event.x.toInt() / (width / 5)
+            val tY = event.y.toInt() / (height / 5)
 
             if (tX < 3 && tY < 3 && MineSweeperModel.getFieldContent(tX, tY) ==
                 MineSweeperModel.EMPTY) {

@@ -74,15 +74,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                     val centerX = (i * width / 5 + width / 10).toFloat()
                     val centerY = (j * height / 5 + height / 10).toFloat()
                     canvas?.drawText(numMines.toString(), centerX, centerY, paintText)
-                }
-//                if (fieldContent == MineSweeperModel.CIRCLE) {
-//                    val centerX = (i * width / 5 + width / 10).toFloat()
-//                    val centerY = (j * height / 5 + height / 10).toFloat()
-//                    val radius = height / 10
-//
-//                    canvas.drawCircle(centerX, centerY, radius.toFloat(), paintLine)
-//                }
-                else if (fieldContent == MineSweeperModel.CROSS) {
+                } else if (fieldContent == MineSweeperModel.CROSS) {
                     canvas.drawLine(
                         (i * width / 5).toFloat(), (j * height / 5).toFloat(),
                         ((i + 1) * width / 5).toFloat(),
@@ -111,7 +103,6 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                 if ((context as MainActivity).isFlagModeOn() && fieldContent == MineSweeperModel.EMPTY) {
                     MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CROSS)
                 } else if (fieldContent != MineSweeperModel.CROSS) {
-//                    MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CIRCLE)
                     MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.getNumMines(tX, tY))
                 }
                 invalidate()

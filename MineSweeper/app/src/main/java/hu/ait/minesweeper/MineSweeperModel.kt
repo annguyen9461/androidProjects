@@ -4,7 +4,6 @@ import kotlin.math.log
 
 object MineSweeperModel {
     public val EMPTY: Short = 0
-    public val CIRCLE: Short = 11
     public val CROSS: Short = 12
     public val MINE: Short = 10
 
@@ -24,15 +23,12 @@ object MineSweeperModel {
         shortArrayOf(1, 0, 0, 0, 0)
     )
 
-    private var nextPlayer = CIRCLE.toShort()
-
     fun resetModel() {
         for (i in 0..4) {
             for (j in 0..4) {
                 model[i][j] = EMPTY
             }
         }
-        nextPlayer = CIRCLE
     }
 
     fun getFieldContent(x: Int, y: Int) = model[x][y]

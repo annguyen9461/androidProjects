@@ -8,8 +8,6 @@ object MineSweeperModel {
     public val CROSS: Short = 2
     public val MINE: Short = 1
 
-    public var flagOn = false
-
     private val model = arrayOf(
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
@@ -18,13 +16,13 @@ object MineSweeperModel {
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY)
     )
 
-    private val mine_placement = arrayOf(
-        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
-        shortArrayOf(EMPTY, EMPTY, EMPTY, MINE, EMPTY),
-        shortArrayOf(EMPTY, EMPTY, MINE, EMPTY, EMPTY),
-        shortArrayOf(MINE, EMPTY, EMPTY, EMPTY, EMPTY),
-        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY)
-    )
+//    private val mine_placement = arrayOf(
+//        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
+//        shortArrayOf(EMPTY, EMPTY, EMPTY, MINE, EMPTY),
+//        shortArrayOf(EMPTY, EMPTY, MINE, EMPTY, EMPTY),
+//        shortArrayOf(MINE, EMPTY, EMPTY, EMPTY, EMPTY),
+//        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY)
+//    )
 
     private var nextPlayer = CIRCLE.toShort()
 
@@ -45,9 +43,9 @@ object MineSweeperModel {
 
     fun getNextPlayer() = nextPlayer
 
-    fun changeNextPlayer() {
-        nextPlayer = if (flagOn) CROSS else CIRCLE
-    }
+//    fun changeNextPlayer() {
+//        nextPlayer = if (flagOn) CROSS else CIRCLE
+//    }
 
 
 }

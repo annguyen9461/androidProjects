@@ -18,13 +18,10 @@ class MainActivity : AppCompatActivity() {
             binding.mineSweeperView.resetGame()
         }
 
-        binding.toggleFlag.setOnClickListener {
-            if (isFlagModeOn() ) {
-                binding.mineSweeperView.changeFlagOn()
-            } else {
-                binding.mineSweeperView.changeFlagOff()
-            }
-        }
+//        binding.toggleFlag.setOnClickListener {
+//            if (isFlagModeOn() ) {
+//            }
+//        }
     }
 
 //    public fun showText(message: String) {
@@ -33,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     public fun isFlagModeOn() : Boolean {
+        print(binding.toggleFlag.isChecked)
         return binding.toggleFlag.isChecked
     }
 

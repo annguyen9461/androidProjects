@@ -68,12 +68,16 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
 
                     canvas.drawCircle(centerX, centerY, radius.toFloat(), paintLine)
                 } else if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CROSS) {
-                    canvas.drawLine((i * width / 5).toFloat(), (j * height / 5).toFloat(),
+                    canvas.drawLine(
+                        (i * width / 5).toFloat(), (j * height / 5).toFloat(),
                         ((i + 1) * width / 5).toFloat(),
-                        ((j + 1) * height / 5).toFloat(), paintLine)
+                        ((j + 1) * height / 5).toFloat(), paintLine
+                    )
 
-                    canvas.drawLine(((i + 1) * width / 5).toFloat(), (j * height / 5).toFloat(),
-                        (i * width / 5).toFloat(), ((j + 1) * height / 5).toFloat(), paintLine)
+                    canvas.drawLine(
+                        ((i + 1) * width / 5).toFloat(), (j * height / 5).toFloat(),
+                        (i * width / 5).toFloat(), ((j + 1) * height / 5).toFloat(), paintLine
+                    )
                 }
             }
         }
@@ -86,9 +90,13 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             val tY = event.y.toInt() / (height / 5)
 
             if (tX < 5 && tY < 5 && MineSweeperModel.getFieldContent(tX, tY) ==
-                MineSweeperModel.EMPTY) {
-                MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.getNextPlayer())
-                MineSweeperModel.changeNextPlayer()
+                MineSweeperModel.EMPTY
+            ) {
+                if ((context as MainActivity).isFlagModeOn()) {
+                    MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CROSS)
+                } else {
+                    MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CIRCLE)
+                }
                 invalidate()
             }
 
@@ -102,12 +110,5 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
         invalidate()
     }
 
-    public fun changeFlagOn() {
-        MineSweeperModel.flagOn = true
-    }
-
-    public fun changeFlagOff() {
-        MineSweeperModel.flagOn = false
-    }
 
 }

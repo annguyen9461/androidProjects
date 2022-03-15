@@ -4,9 +4,9 @@ import kotlin.math.log
 
 object MineSweeperModel {
     public val EMPTY: Short = 0
-    public val CIRCLE: Short = 1
-    public val CROSS: Short = 2
-    public val MINE: Short = 1
+    public val CIRCLE: Short = 11
+    public val CROSS: Short = 12
+    public val MINE: Short = 10
 
     private val model = arrayOf(
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
@@ -16,13 +16,13 @@ object MineSweeperModel {
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY)
     )
 
-//    private val mine_placement = arrayOf(
-//        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),
-//        shortArrayOf(EMPTY, EMPTY, EMPTY, MINE, EMPTY),
-//        shortArrayOf(EMPTY, EMPTY, MINE, EMPTY, EMPTY),
-//        shortArrayOf(MINE, EMPTY, EMPTY, EMPTY, EMPTY),
-//        shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY)
-//    )
+    private val mine_placement = arrayOf(
+        shortArrayOf(0, 0, 0, 1, 0),
+        shortArrayOf(0, 0, 2, MINE, 1),
+        shortArrayOf(1, 1, MINE, 2, 0),
+        shortArrayOf(MINE, 1, 1, 0, 0),
+        shortArrayOf(1, 0, 0, 0, 0)
+    )
 
     private var nextPlayer = CIRCLE.toShort()
 
@@ -41,11 +41,7 @@ object MineSweeperModel {
         model[x][y] = content
     }
 
-    fun getNextPlayer() = nextPlayer
-
-//    fun changeNextPlayer() {
-//        nextPlayer = if (flagOn) CROSS else CIRCLE
-//    }
+    fun getNumMines(x: Int, y: Int) = mine_placement[x][y]
 
 
 }

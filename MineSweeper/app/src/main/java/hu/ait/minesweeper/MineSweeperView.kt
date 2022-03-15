@@ -12,6 +12,8 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
 
     private lateinit var paintBackground: Paint
     private lateinit var paintLine: Paint
+    private lateinit var paintText: Paint
+
 
     init {
         paintBackground = Paint()
@@ -22,6 +24,10 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
         paintLine.color = Color.WHITE
         paintLine.style = Paint.Style.STROKE
         paintLine.strokeWidth = 5f
+
+        paintText = Paint()
+        paintText.textSize = 70f
+        paintText.color = Color.GREEN
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -34,6 +40,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
 
         drawGameArea(canvas!!)
         drawPlayers(canvas!!)
+
     }
 
     private fun drawGameArea(canvas: Canvas) {
@@ -61,24 +68,31 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     private fun drawPlayers(canvas: Canvas) {
         for (i in 0..4) {
             for (j in 0..4) {
-                if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CIRCLE) {
+                var fieldContent = MineSweeperModel.getFieldContent(i, j)
+                var numMines = MineSweeperModel.getNumMines(i,j)
+                if (fieldContent == numMines) {
                     val centerX = (i * width / 5 + width / 10).toFloat()
                     val centerY = (j * height / 5 + height / 10).toFloat()
-                    val radius = height / 10
-
-                    canvas.drawCircle(centerX, centerY, radius.toFloat(), paintLine)
-                } else if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CROSS) {
-                    canvas.drawLine(
-                        (i * width / 5).toFloat(), (j * height / 5).toFloat(),
-                        ((i + 1) * width / 5).toFloat(),
-                        ((j + 1) * height / 5).toFloat(), paintLine
-                    )
-
-                    canvas.drawLine(
-                        ((i + 1) * width / 5).toFloat(), (j * height / 5).toFloat(),
-                        (i * width / 5).toFloat(), ((j + 1) * height / 5).toFloat(), paintLine
-                    )
+                    canvas?.drawText(numMines.toString(), centerX, centerY, paintText)
                 }
+//                if (fieldContent == MineSweeperModel.CIRCLE) {
+//                    val centerX = (i * width / 5 + width / 10).toFloat()
+//                    val centerY = (j * height / 5 + height / 10).toFloat()
+//                    val radius = height / 10
+//
+//                    canvas.drawCircle(centerX, centerY, radius.toFloat(), paintLine)
+//                } else if (fieldContent == MineSweeperModel.CROSS) {
+//                    canvas.drawLine(
+//                        (i * width / 5).toFloat(), (j * height / 5).toFloat(),
+//                        ((i + 1) * width / 5).toFloat(),
+//                        ((j + 1) * height / 5).toFloat(), paintLine
+//                    )
+//
+//                    canvas.drawLine(
+//                        ((i + 1) * width / 5).toFloat(), (j * height / 5).toFloat(),
+//                        (i * width / 5).toFloat(), ((j + 1) * height / 5).toFloat(), paintLine
+//                    )
+//                }
             }
         }
     }
@@ -95,13 +109,13 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                 if ((context as MainActivity).isFlagModeOn()) {
                     MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CROSS)
                 } else {
-                    MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CIRCLE)
+//                    MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CIRCLE)
+                    MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.getNumMines(tX, tY))
                 }
                 invalidate()
             }
 
         }
-
         return true
     }
 

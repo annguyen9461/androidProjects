@@ -69,7 +69,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
         for (i in 0..4) {
             for (j in 0..4) {
                 var fieldContent = MineSweeperModel.getFieldContent(i, j)
-                var numMines = MineSweeperModel.getNumMines(i,j)
+                var numMines = MineSweeperModel.getNumMines(i, j)
                 if (fieldContent == numMines) {
                     val centerX = (i * width / 5 + width / 10).toFloat()
                     val centerY = (j * height / 5 + height / 10).toFloat()
@@ -81,18 +81,19 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
 //                    val radius = height / 10
 //
 //                    canvas.drawCircle(centerX, centerY, radius.toFloat(), paintLine)
-//                } else if (fieldContent == MineSweeperModel.CROSS) {
-//                    canvas.drawLine(
-//                        (i * width / 5).toFloat(), (j * height / 5).toFloat(),
-//                        ((i + 1) * width / 5).toFloat(),
-//                        ((j + 1) * height / 5).toFloat(), paintLine
-//                    )
-//
-//                    canvas.drawLine(
-//                        ((i + 1) * width / 5).toFloat(), (j * height / 5).toFloat(),
-//                        (i * width / 5).toFloat(), ((j + 1) * height / 5).toFloat(), paintLine
-//                    )
 //                }
+                else if (fieldContent == MineSweeperModel.CROSS) {
+                    canvas.drawLine(
+                        (i * width / 5).toFloat(), (j * height / 5).toFloat(),
+                        ((i + 1) * width / 5).toFloat(),
+                        ((j + 1) * height / 5).toFloat(), paintLine
+                    )
+
+                    canvas.drawLine(
+                        ((i + 1) * width / 5).toFloat(), (j * height / 5).toFloat(),
+                        (i * width / 5).toFloat(), ((j + 1) * height / 5).toFloat(), paintLine
+                    )
+                }
             }
         }
     }
@@ -103,8 +104,10 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             val tX = event.x.toInt() / (width / 5)
             val tY = event.y.toInt() / (height / 5)
 
-            if (tX < 5 && tY < 5 && MineSweeperModel.getFieldContent(tX, tY) ==
-                MineSweeperModel.EMPTY
+            var fieldContent = MineSweeperModel.getFieldContent(tX, tY)
+            if (tX < 5 && tY < 5
+                && fieldContent != MineSweeperModel.MINE
+                && fieldContent != MineSweeperModel.CROSS
             ) {
                 if ((context as MainActivity).isFlagModeOn()) {
                     MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CROSS)

@@ -107,11 +107,10 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             var fieldContent = MineSweeperModel.getFieldContent(tX, tY)
             if (tX < 5 && tY < 5
                 && fieldContent != MineSweeperModel.MINE
-                && fieldContent != MineSweeperModel.CROSS
             ) {
                 if ((context as MainActivity).isFlagModeOn()) {
                     MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CROSS)
-                } else {
+                } else if (fieldContent != MineSweeperModel.CROSS) {
 //                    MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CIRCLE)
                     MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.getNumMines(tX, tY))
                 }

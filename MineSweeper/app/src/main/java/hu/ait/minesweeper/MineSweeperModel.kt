@@ -3,7 +3,7 @@ package hu.ait.minesweeper
 import kotlin.math.log
 
 object MineSweeperModel {
-    public val MINE: Short = 0
+    public val MINE: Short = 10
     public val EMPTY: Short = 11
     public val CROSS: Short = 12
 

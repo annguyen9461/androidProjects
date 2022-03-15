@@ -70,11 +70,15 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             for (j in 0..4) {
                 var fieldContent = MineSweeperModel.getFieldContent(i, j)
                 var numMines = MineSweeperModel.getNumMines(i, j)
+
+//             unfilled cells with NO FLAGS
                 if (fieldContent == numMines) {
                     val centerX = (i * width / 5 + width / 10).toFloat()
                     val centerY = (j * height / 5 + height / 10).toFloat()
                     canvas?.drawText(numMines.toString(), centerX, centerY, paintText)
-                } else if (fieldContent == MineSweeperModel.CROSS) {
+                }
+//              FLAGGED CELLS
+                else if (fieldContent == MineSweeperModel.CROSS) {
                     canvas.drawLine(
                         (i * width / 5).toFloat(), (j * height / 5).toFloat(),
                         ((i + 1) * width / 5).toFloat(),
@@ -97,6 +101,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             val tY = event.y.toInt() / (height / 5)
 
             var fieldContent = MineSweeperModel.getFieldContent(tX, tY)
+//          if cell is not a MINE
             if (tX < 5 && tY < 5
                 && fieldContent != MineSweeperModel.MINE
             ) {

@@ -102,36 +102,36 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             val tY = event.y.toInt() / (height / 5)
 
             var fieldContent = MineSweeperModel.getFieldContent(tX, tY)
-            if (tX < 5 && tY < 5) {
+            if (tX < 5 && tY < 5 && !gameOver) {
                 // FLAGGING NONMINE
                 if (flaggingNonMine()) {
                     (context as MainActivity).binding.tvData.text = "You lost!"
                     gameOver = true
                 }
-                // NOT MINE
-                if (fieldContent != MineSweeperModel.MINE
-                    && !gameOver
-                ) {
-                    // FLAGGED
-                    if ((context as MainActivity).isFlagModeOn() && fieldContent == MineSweeperModel.EMPTY) {
-                        MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CROSS)
+                else if (!gameOver) {
+                    // NOT MINE
+                    if (fieldContent != MineSweeperModel.MINE) {
+                        // FLAGGED
+                        if ((context as MainActivity).isFlagModeOn() && fieldContent == MineSweeperModel.EMPTY) {
+                            MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CROSS)
+                        }
+                        // NOT FLAGGED
+                        else if (fieldContent != MineSweeperModel.CROSS) {
+                            MineSweeperModel.setFieldContent(
+                                tX,
+                                tY,
+                                MineSweeperModel.getNumMines(tX, tY)
+                            )
+                        }
+                        invalidate()
+                        checkWinning()
                     }
-                    // NOT FLAGGED
-                    else if (fieldContent != MineSweeperModel.CROSS) {
-                        MineSweeperModel.setFieldContent(
-                            tX,
-                            tY,
-                            MineSweeperModel.getNumMines(tX, tY)
-                        )
-                    }
-                    invalidate()
-                    checkWinning()
-                }
-                //  STEP ON MINE
-                else {
-                    (context as MainActivity).binding.tvData.text = "You lost!"
-                    gameOver = true
+                    //  STEP ON MINE
+                    else {
+                        (context as MainActivity).binding.tvData.text = "You lost!"
+                        gameOver = true
 
+                    }
                 }
             }
 

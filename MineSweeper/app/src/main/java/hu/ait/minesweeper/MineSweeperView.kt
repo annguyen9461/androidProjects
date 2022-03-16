@@ -1,9 +1,7 @@
 package hu.ait.minesweeper
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -13,6 +11,10 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     private lateinit var paintBackground: Paint
     private lateinit var paintLine: Paint
     private lateinit var paintText: Paint
+
+    private var bitmapBackground : Bitmap = BitmapFactory.decodeResource(
+        resources, R.drawable.background
+    )
 
     private var gameOver = false
 
@@ -38,6 +40,8 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             0f, 0f, width.toFloat(),
             height.toFloat(), paintBackground
         )
+
+        canvas?.drawBitmap(bitmapBackground, 0f, 0f, null)
 
         drawGameArea(canvas!!)
         drawPlayers(canvas!!)
@@ -96,13 +100,13 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_DOWN) {
+        if (event?.action == MotionEvent.ACTION_DOWN  && !gameOver) {
 
             val tX = event.x.toInt() / (width / 5)
             val tY = event.y.toInt() / (height / 5)
 
             var fieldContent = MineSweeperModel.getFieldContent(tX, tY)
-            if (tX < 5 && tY < 5 && !gameOver) {
+            if (tX < 5 && tY < 5) {
                 // FLAGGING NONMINE
                 if (flaggingNonMine(tX, tY)) {
                     (context as MainActivity).binding.tvData.text = "You lost! (flagged a non-mine cell)"

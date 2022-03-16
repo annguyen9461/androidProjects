@@ -26,9 +26,6 @@ class MainActivity : AppCompatActivity() {
         val status = "minesweeping in progress..."
 
         Snackbar.make(binding.root, status, Snackbar.LENGTH_LONG)
-//                .setAction("Ok") {
-//                    binding.tvData.text = "Start over?"
-//                }
             .show()
 
     }

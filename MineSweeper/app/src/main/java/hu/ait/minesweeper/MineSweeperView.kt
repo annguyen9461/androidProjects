@@ -151,13 +151,8 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     public fun flaggingNonMine(tX: Int, tY: Int): Boolean {
-        if (MineSweeperModel.getFieldContent(tX, tY) == MineSweeperModel.CROSS
-            && MineSweeperModel.getNumMines(tX, tY) != MineSweeperModel.MINE
-        ) {
-            return true
-        } else {
-            return false
-        }
+        return (MineSweeperModel.getFieldContent(tX, tY) == MineSweeperModel.CROSS
+                && MineSweeperModel.getNumMines(tX, tY) != MineSweeperModel.MINE)
     }
 
     public fun resetGame() {

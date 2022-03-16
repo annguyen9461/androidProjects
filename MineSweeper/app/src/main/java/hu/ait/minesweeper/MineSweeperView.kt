@@ -124,7 +124,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             if (tX < 5 && tY < 5) {
                 // FLAGGING NONMINE
                 if (flaggingNonMine(tX, tY)) {
-                    (context as MainActivity).binding.tvData.text = "You lost! (flagged a non-mine cell)"
+                    (context as MainActivity).binding.tvData.text = "You lost! (flagged a field without a mine)"
                     gameOver = true
                 } else if (!gameOver) {
                     // NOT MINE

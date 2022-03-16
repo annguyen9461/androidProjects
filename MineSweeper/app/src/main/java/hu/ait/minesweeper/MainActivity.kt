@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnReset.setOnClickListener {
             binding.mineSweeperView.resetGame()
-//            binding.tvData.text = ""
         }
 
         val status = "minesweeping in progress..."

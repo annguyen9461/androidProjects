@@ -125,10 +125,9 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                         )
                     }
                     invalidate()
-
                     checkWinning()
                 }
-                //  MINE
+                //  STEP ON MINE
                 else {
                     (context as MainActivity).binding.tvData.text = "You lost!"
                     gameOver = true
@@ -148,8 +147,8 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                 }
             }
         }
-        gameOver = true
         (context as MainActivity).binding.tvData.text = "You won!"
+        gameOver = true
     }
 
     public fun flaggingNonMine(): Boolean {

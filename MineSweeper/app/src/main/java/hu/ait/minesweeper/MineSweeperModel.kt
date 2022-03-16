@@ -1,5 +1,7 @@
 package hu.ait.minesweeper
 
+import android.content.Context
+import android.view.View
 import kotlin.math.log
 
 object MineSweeperModel {

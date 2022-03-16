@@ -14,6 +14,9 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     private lateinit var paintLine: Paint
     private lateinit var paintText: Paint
 
+    private var gameOver = false
+    private var lost = false
+    private var won = false
 
     init {
         paintBackground = Paint()
@@ -71,7 +74,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                 var fieldContent = MineSweeperModel.getFieldContent(i, j)
                 var numMines = MineSweeperModel.getNumMines(i, j)
 
-//             unfilled cells with NO FLAGS
+//              UNFILLED cells with NO FLAGS
                 if (fieldContent == numMines) {
                     val centerX = (i * width / 5 + width / 10).toFloat()
                     val centerY = (j * height / 5 + height / 10).toFloat()
@@ -101,16 +104,26 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             val tY = event.y.toInt() / (height / 5)
 
             var fieldContent = MineSweeperModel.getFieldContent(tX, tY)
-//          if cell is not a MINE
+            // NOT MINE
             if (tX < 5 && tY < 5
                 && fieldContent != MineSweeperModel.MINE
+                && !gameOver
             ) {
+                // FLAGGED
                 if ((context as MainActivity).isFlagModeOn() && fieldContent == MineSweeperModel.EMPTY) {
                     MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CROSS)
-                } else if (fieldContent != MineSweeperModel.CROSS) {
+                }
+                // NOT FLAGGED
+                else if (fieldContent != MineSweeperModel.CROSS) {
                     MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.getNumMines(tX, tY))
                 }
                 invalidate()
+            }
+            // STEPPED ON MINE
+            else {
+                gameOver = true
+                lost = true
+                (context as MainActivity).binding.tvData.text = "You lost!"
             }
 
         }
@@ -118,6 +131,9 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     public fun resetGame() {
+        gameOver = false
+        lost = false
+        won = false
         MineSweeperModel.resetModel()
         invalidate()
     }

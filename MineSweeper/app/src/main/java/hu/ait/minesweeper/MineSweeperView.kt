@@ -41,7 +41,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
         super.onSizeChanged(w, h, oldw, oldh)
 
         bitmapFlag = Bitmap.createScaledBitmap(bitmapFlag,
-            width/3, height/3, false)
+            width/5, height/5, false)
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -95,16 +95,18 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                 }
 //              FLAGGED CELLS
                 else if (fieldContent == MineSweeperModel.CROSS) {
-                    canvas.drawLine(
-                        (i * width / 5).toFloat(), (j * height / 5).toFloat(),
-                        ((i + 1) * width / 5).toFloat(),
-                        ((j + 1) * height / 5).toFloat(), paintLine
-                    )
+//                    canvas.drawLine(
+//                        (i * width / 5).toFloat(), (j * height / 5).toFloat(),
+//                        ((i + 1) * width / 5).toFloat(),
+//                        ((j + 1) * height / 5).toFloat(), paintLine
+//                    )
+//
+//                    canvas.drawLine(
+//                        ((i + 1) * width / 5).toFloat(), (j * height / 5).toFloat(),
+//                        (i * width / 5).toFloat(), ((j + 1) * height / 5).toFloat(), paintLine
+//                    )
+                    canvas?.drawBitmap(bitmapFlag, (i * width / 5).toFloat(), (j * height / 5).toFloat(), null)
 
-                    canvas.drawLine(
-                        ((i + 1) * width / 5).toFloat(), (j * height / 5).toFloat(),
-                        (i * width / 5).toFloat(), ((j + 1) * height / 5).toFloat(), paintLine
-                    )
                 }
             }
         }

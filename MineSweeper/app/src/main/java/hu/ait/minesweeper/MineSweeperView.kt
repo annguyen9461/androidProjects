@@ -15,7 +15,6 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     private lateinit var paintText: Paint
 
     private var gameOver = false
-    private var lost = false
     private var won = false
 
     init {
@@ -122,7 +121,6 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             // STEPPED ON MINE
             else {
                 gameOver = true
-                lost = true
                 (context as MainActivity).binding.tvData.text = "You lost!"
             }
 
@@ -132,8 +130,8 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
 
     public fun resetGame() {
         gameOver = false
-        lost = false
         won = false
+        (context as MainActivity).binding.tvData.text = ""
         MineSweeperModel.resetModel()
         invalidate()
     }

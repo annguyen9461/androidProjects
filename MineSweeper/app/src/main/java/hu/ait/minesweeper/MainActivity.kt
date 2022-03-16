@@ -21,11 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnReset.setOnClickListener {
             binding.mineSweeperView.resetGame()
-            binding.tvData.text = "minesweeping in progress..."
+//            binding.tvData.text = ""
         }
 
         val status = "minesweeping in progress..."
-        binding.tvData.text = status
 
         Snackbar.make(binding.root, status, Snackbar.LENGTH_LONG)
 //                .setAction("Ok") {

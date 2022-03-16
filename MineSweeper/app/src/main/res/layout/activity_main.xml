@@ -45,7 +45,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#DD4F4F"
-                android:text="minesweeping in progress..."
                 android:textSize="28sp"
                 tools:visibility="visible" />
 

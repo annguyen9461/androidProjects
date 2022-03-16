@@ -35,7 +35,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
         paintLine = Paint()
         paintLine.color = Color.WHITE
         paintLine.style = Paint.Style.STROKE
-        paintLine.strokeWidth = 5f
+        paintLine.strokeWidth = 15f
 
         paintText = Paint()
         paintText.textSize = 70f
@@ -69,7 +69,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
 
     private fun drawGameArea(canvas: Canvas) {
         // border
-        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paintLine)
+//        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paintLine)
 
         // four horizontal lines
         for (i in 1..4) {

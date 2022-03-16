@@ -12,8 +12,12 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     private lateinit var paintLine: Paint
     private lateinit var paintText: Paint
 
-    private var bitmapBackground : Bitmap = BitmapFactory.decodeResource(
+    private var bitmapBg : Bitmap = BitmapFactory.decodeResource(
         resources, R.drawable.background
+    )
+
+    private var bitmapFlag : Bitmap = BitmapFactory.decodeResource(
+        resources, R.drawable.flag
     )
 
     private var gameOver = false
@@ -30,7 +34,14 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
 
         paintText = Paint()
         paintText.textSize = 70f
-        paintText.color = Color.GREEN
+        paintText.color = Color.MAGENTA
+    }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+
+        bitmapFlag = Bitmap.createScaledBitmap(bitmapFlag,
+            width/3, height/3, false)
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -41,7 +52,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             height.toFloat(), paintBackground
         )
 
-        canvas?.drawBitmap(bitmapBackground, 0f, 0f, null)
+        canvas?.drawBitmap(bitmapBg, 0f, 0f, null)
 
         drawGameArea(canvas!!)
         drawPlayers(canvas!!)

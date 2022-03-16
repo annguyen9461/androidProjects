@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             binding.mineSweeperView.resetGame()
         }
 
-        val status = "minesweeping in progress..."
+        val status = getString(R.string.gameInProgressText)
 
         Snackbar.make(binding.root, status, Snackbar.LENGTH_LONG)
             .show()

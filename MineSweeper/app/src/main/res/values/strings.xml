@@ -2,4 +2,8 @@
     <string name="app_name">MineSweeper</string>
     <string name="flag_mode">FLAG MODE</string>
     <string name="step_mode">STEP MODE</string>
+    <string name="stepOnMineLosing">You lost! (stepped on a mine)</string>
+    <string name="flagNonMineLosing">You lost! (flagged a field without a mine)</string>
+    <string name="winningText">You won!</string>
+    <string name="gameInProgressText">minesweeping in progress...</string>
 </resources>

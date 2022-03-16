@@ -124,7 +124,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             if (tX < 5 && tY < 5) {
                 // FLAGGING NONMINE
                 if (flaggingNonMine(tX, tY)) {
-                    (context as MainActivity).binding.tvData.text = "You lost! (flagged a field without a mine)"
+                    (context as MainActivity).binding.tvData.text = context.getString(R.string.flagNonMineLosing)
                     gameOver = true
                 } else if (!gameOver) {
                     // NOT MINE
@@ -144,12 +144,11 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                     }
                     //  STEP ON MINE
                     else {
-                        (context as MainActivity).binding.tvData.text = "You lost! (stepped on a mine)"
+                        (context as MainActivity).binding.tvData.text = context.getString(R.string.stepOnMineLosing)
                         gameOver = true
                     }
                 }
             }
-
         }
         return true
     }
@@ -162,7 +161,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                 }
             }
         }
-        (context as MainActivity).binding.tvData.text = "You won!"
+        (context as MainActivity).binding.tvData.text = context.getString(R.string.winningText)
         gameOver = true
     }
 

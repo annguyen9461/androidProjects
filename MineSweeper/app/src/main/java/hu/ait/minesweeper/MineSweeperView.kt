@@ -20,6 +20,11 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
         resources, R.drawable.flag
     )
 
+    private var bitmapBomb : Bitmap = BitmapFactory.decodeResource(
+        resources, R.drawable.bomb
+    )
+
+
     private var gameOver = false
 
     init {
@@ -41,6 +46,9 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
         super.onSizeChanged(w, h, oldw, oldh)
 
         bitmapFlag = Bitmap.createScaledBitmap(bitmapFlag,
+            width/5, height/5, false)
+
+        bitmapBomb = Bitmap.createScaledBitmap(bitmapBomb,
             width/5, height/5, false)
     }
 
@@ -87,8 +95,12 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                 var fieldContent = MineSweeperModel.getFieldContent(i, j)
                 var numMines = MineSweeperModel.getNumMines(i, j)
 
-//              UNFILLED cells with NO FLAGS
-                if (fieldContent == numMines) {
+//              draw BOMB
+                if (fieldContent == MineSweeperModel.MINE) {
+                    canvas?.drawBitmap(bitmapBomb, (i * width / 5).toFloat(), (j * height / 5).toFloat(), null)
+                }
+//              UNFILLED cells with NO FLAGS (draw numbers)
+                else if (fieldContent == numMines) {
                     val centerX = (i * width / 5 + width / 12).toFloat()
                     val centerY = (j * height / 5 + height / 7).toFloat()
                     canvas?.drawText(numMines.toString(), centerX, centerY, paintText)

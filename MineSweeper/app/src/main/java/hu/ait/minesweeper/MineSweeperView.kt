@@ -104,11 +104,10 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             var fieldContent = MineSweeperModel.getFieldContent(tX, tY)
             if (tX < 5 && tY < 5 && !gameOver) {
                 // FLAGGING NONMINE
-                if (flaggingNonMine()) {
+                if (flaggingNonMine(tX, tY)) {
                     (context as MainActivity).binding.tvData.text = "You lost!"
                     gameOver = true
-                }
-                else if (!gameOver) {
+                } else if (!gameOver) {
                     // NOT MINE
                     if (fieldContent != MineSweeperModel.MINE) {
                         // FLAGGED
@@ -151,17 +150,14 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
         gameOver = true
     }
 
-    public fun flaggingNonMine(): Boolean {
-        for (i in 1..4) {
-            for (j in 1..4) {
-                if (MineSweeperModel.getFieldContent(i, j) == MineSweeperModel.CROSS
-                    && MineSweeperModel.getNumMines(i, j) != MineSweeperModel.MINE
-                ) {
-                    return true
-                }
-            }
+    public fun flaggingNonMine(tX: Int, tY: Int): Boolean {
+        if (MineSweeperModel.getFieldContent(tX, tY) == MineSweeperModel.CROSS
+            && MineSweeperModel.getNumMines(tX, tY) != MineSweeperModel.MINE
+        ) {
+            return true
+        } else {
+            return false
         }
-        return false
     }
 
     public fun resetGame() {

@@ -7,7 +7,7 @@ import kotlin.math.log
 object MineSweeperModel {
     public val MINE: Short = 10
     public val EMPTY: Short = 11
-    public val CROSS: Short = 12
+    public val FLAG: Short = 12
 
     private val model = arrayOf(
         shortArrayOf(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY),

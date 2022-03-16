@@ -22,10 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="10dp"
-        android:textColorLink="#E91E63"
+        android:textColorLink="@color/white"
         android:textOff="@string/step_mode"
         android:textOn="@string/flag_mode" />
-
 
     <Button
         android:id="@+id/btnReset"

@@ -106,7 +106,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                     canvas?.drawText(numMines.toString(), centerX, centerY, paintText)
                 }
 //              FLAGGED CELLS
-                else if (fieldContent == MineSweeperModel.CROSS) {
+                else if (fieldContent == MineSweeperModel.FLAG) {
                     canvas?.drawBitmap(bitmapFlag, (i * width / 5).toFloat(), (j * height / 5).toFloat(), null)
 
                 }
@@ -131,13 +131,11 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                     if (fieldContent != MineSweeperModel.MINE) {
                         // FLAGGED
                         if ((context as MainActivity).isFlagModeOn() && fieldContent == MineSweeperModel.EMPTY) {
-                            MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.CROSS)
+                            MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.FLAG)
                         }
                         // NOT FLAGGED
-                        else if (fieldContent != MineSweeperModel.CROSS) {
-                            MineSweeperModel.setFieldContent(
-                                tX,
-                                tY,
+                        else if (fieldContent != MineSweeperModel.FLAG) {
+                            MineSweeperModel.setFieldContent(tX, tY,
                                 MineSweeperModel.getNumMines(tX, tY)
                             )
                         }
@@ -148,7 +146,6 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                     else {
                         (context as MainActivity).binding.tvData.text = "You lost! (stepped on a mine)"
                         gameOver = true
-
                     }
                 }
             }
@@ -170,7 +167,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     public fun flaggingNonMine(tX: Int, tY: Int): Boolean {
-        return (MineSweeperModel.getFieldContent(tX, tY) == MineSweeperModel.CROSS
+        return (MineSweeperModel.getFieldContent(tX, tY) == MineSweeperModel.FLAG
                 && MineSweeperModel.getNumMines(tX, tY) != MineSweeperModel.MINE)
     }
 

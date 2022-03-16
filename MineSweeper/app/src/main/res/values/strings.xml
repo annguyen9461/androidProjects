@@ -6,4 +6,5 @@
     <string name="flagNonMineLosing">You lost! (flagged a field without a mine)</string>
     <string name="winningText">You won!</string>
     <string name="gameInProgressText">minesweeping in progress...</string>
+    <string name="emptyString" />
 </resources>

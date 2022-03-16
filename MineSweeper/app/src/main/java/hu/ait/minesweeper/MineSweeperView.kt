@@ -172,7 +172,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
 
     public fun resetGame() {
         gameOver = false
-        (context as MainActivity).binding.tvData.text = ""
+        (context as MainActivity).binding.tvData.text = context.getString(R.string.emptyString)
         MineSweeperModel.resetModel()
         invalidate()
     }

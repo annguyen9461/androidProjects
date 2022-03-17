@@ -72,9 +72,6 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     private fun drawGameArea(canvas: Canvas) {
-        // border
-//        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paintLine)
-
         // four horizontal lines
         for (i in 1..4) {
             canvas.drawLine(

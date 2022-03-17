@@ -121,6 +121,7 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
             val tY = event.y.toInt() / (height / 5)
 
             var fieldContent = MineSweeperModel.getFieldContent(tX, tY)
+            var numMines = MineSweeperModel.getNumMines(tX,tY)
             if (tX < 5 && tY < 5) {
                 // FLAGGING NONMINE
                 if (flaggingNonMine(tX, tY)) {
@@ -128,13 +129,13 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                     gameOver = true
                 } else if (!gameOver) {
                     // NOT MINE
-                    if (fieldContent != MineSweeperModel.MINE) {
-                        // FLAGGED
-                        if ((context as MainActivity).isFlagModeOn() && fieldContent == MineSweeperModel.EMPTY) {
-                            MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.FLAG)
-                        }
+                    if (numMines != MineSweeperModel.MINE) {
+//                        FLAGGED
+//                        if ((context as MainActivity).isFlagModeOn() && fieldContent == MineSweeperModel.EMPTY) {
+//                            MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.FLAG)
+//                        }
                         // NOT FLAGGED
-                        else if (fieldContent != MineSweeperModel.FLAG) {
+                        if (fieldContent != MineSweeperModel.FLAG) {
                             MineSweeperModel.setFieldContent(tX, tY,
                                 MineSweeperModel.getNumMines(tX, tY)
                             )
@@ -143,7 +144,9 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                         checkWinning()
                     }
                     //  STEP ON MINE
-                    else {
+                    else if ((context as MainActivity).isFlagModeOn()){
+                        checkWinning()
+                    } else {
                         (context as MainActivity).binding.tvData.text = context.getString(R.string.stepOnMineLosing)
                         gameOver = true
                     }
@@ -166,8 +169,8 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     public fun flaggingNonMine(tX: Int, tY: Int): Boolean {
-        return (MineSweeperModel.getFieldContent(tX, tY) == MineSweeperModel.FLAG
-                && MineSweeperModel.getNumMines(tX, tY) != MineSweeperModel.MINE)
+        return ((context as MainActivity).isFlagModeOn() &&
+                MineSweeperModel.getNumMines(tX, tY) != MineSweeperModel.MINE)
     }
 
     public fun resetGame() {

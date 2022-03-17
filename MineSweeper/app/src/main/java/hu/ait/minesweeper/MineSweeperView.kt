@@ -12,15 +12,15 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     private lateinit var paintLine: Paint
     private lateinit var paintText: Paint
 
-    private var bitmapBg : Bitmap = BitmapFactory.decodeResource(
+    private var bitmapBg: Bitmap = BitmapFactory.decodeResource(
         resources, R.drawable.background
     )
 
-    private var bitmapFlag : Bitmap = BitmapFactory.decodeResource(
+    private var bitmapFlag: Bitmap = BitmapFactory.decodeResource(
         resources, R.drawable.flag
     )
 
-    private var bitmapBomb : Bitmap = BitmapFactory.decodeResource(
+    private var bitmapBomb: Bitmap = BitmapFactory.decodeResource(
         resources, R.drawable.bomb
     )
 
@@ -45,11 +45,15 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
 
-        bitmapFlag = Bitmap.createScaledBitmap(bitmapFlag,
-            width/5, height/5, false)
+        bitmapFlag = Bitmap.createScaledBitmap(
+            bitmapFlag,
+            width / 5, height / 5, false
+        )
 
-        bitmapBomb = Bitmap.createScaledBitmap(bitmapBomb,
-            width/5, height/5, false)
+        bitmapBomb = Bitmap.createScaledBitmap(
+            bitmapBomb,
+            width / 5, height / 5, false
+        )
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -97,7 +101,12 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
 
 //              draw BOMB
                 if (fieldContent == MineSweeperModel.MINE) {
-                    canvas?.drawBitmap(bitmapBomb, (i * width / 5).toFloat(), (j * height / 5).toFloat(), null)
+                    canvas?.drawBitmap(
+                        bitmapBomb,
+                        (i * width / 5).toFloat(),
+                        (j * height / 5).toFloat(),
+                        null
+                    )
                 }
 //              UNFILLED cells with NO FLAGS (draw numbers)
                 else if (fieldContent == numMines) {
@@ -107,7 +116,12 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
                 }
 //              FLAGGED CELLS
                 else if (fieldContent == MineSweeperModel.FLAG) {
-                    canvas?.drawBitmap(bitmapFlag, (i * width / 5).toFloat(), (j * height / 5).toFloat(), null)
+                    canvas?.drawBitmap(
+                        bitmapFlag,
+                        (i * width / 5).toFloat(),
+                        (j * height / 5).toFloat(),
+                        null
+                    )
 
                 }
             }
@@ -115,41 +129,59 @@ class MineSweeperView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_DOWN  && !gameOver) {
+        if (event?.action == MotionEvent.ACTION_DOWN && !gameOver) {
 
             val tX = event.x.toInt() / (width / 5)
             val tY = event.y.toInt() / (height / 5)
 
             var fieldContent = MineSweeperModel.getFieldContent(tX, tY)
-            var numMines = MineSweeperModel.getNumMines(tX,tY)
+            var numMines = MineSweeperModel.getNumMines(tX, tY)
             if (tX < 5 && tY < 5) {
                 // FLAGGING NONMINE
                 if (flaggingNonMine(tX, tY)) {
-                    (context as MainActivity).binding.tvData.text = context.getString(R.string.flagNonMineLosing)
+                    MineSweeperModel.setFieldContent(tX, tY,
+                        MineSweeperModel.FLAG
+                    )
+                    invalidate()
+                    (context as MainActivity).binding.tvData.text =
+                        context.getString(R.string.flagNonMineLosing)
                     gameOver = true
                 } else if (!gameOver) {
                     // NOT MINE
                     if (numMines != MineSweeperModel.MINE) {
-//                        FLAGGED
-//                        if ((context as MainActivity).isFlagModeOn() && fieldContent == MineSweeperModel.EMPTY) {
-//                            MineSweeperModel.setFieldContent(tX, tY, MineSweeperModel.FLAG)
-//                        }
                         // NOT FLAGGED
                         if (fieldContent != MineSweeperModel.FLAG) {
-                            MineSweeperModel.setFieldContent(tX, tY,
+                            MineSweeperModel.setFieldContent(
+                                tX, tY,
                                 MineSweeperModel.getNumMines(tX, tY)
                             )
                         }
                         invalidate()
                         checkWinning()
                     }
-                    //  STEP ON MINE
-                    else if ((context as MainActivity).isFlagModeOn()){
-                        checkWinning()
-                    } else {
-                        (context as MainActivity).binding.tvData.text = context.getString(R.string.stepOnMineLosing)
-                        gameOver = true
+                    //  MINE
+                    else {
+                        //  while flagging
+                        if ((context as MainActivity).isFlagModeOn()) {
+                            MineSweeperModel.setFieldContent(
+                                tX, tY,
+                                MineSweeperModel.FLAG
+                            )
+                            checkWinning()
+                        }
+                        // while stepping
+                        else {
+                            MineSweeperModel.setFieldContent(
+                                tX, tY,
+                                MineSweeperModel.MINE
+                            )
+                            (context as MainActivity).binding.tvData.text =
+                                context.getString(R.string.stepOnMineLosing)
+                            gameOver = true
+                        }
+                        invalidate()
                     }
+
                 }
             }
         }

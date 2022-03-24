@@ -20,6 +20,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun addNewMoneyItem() {
         val moneyRow = MoneyRowBinding.inflate(layoutInflater)
+
+        moneyRow.tvMoneyTitle.text = binding.etMoneyName.text.toString()
+        moneyRow.tvMoneyAmt.text = binding.etMoneyAmount.text.toString()
+
         binding.root.addView(moneyRow.root)
     }
 }

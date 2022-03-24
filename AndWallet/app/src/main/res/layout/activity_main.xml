@@ -24,6 +24,7 @@
             android:layout_width="141dp"
             android:layout_height="43dp"
             android:hint="Amount of money"
+            android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"></EditText>
 

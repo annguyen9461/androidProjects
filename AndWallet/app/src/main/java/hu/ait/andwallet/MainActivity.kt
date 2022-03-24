@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener() {
             addNewMoneyItem()
         }
+
     }
 
     private fun addNewMoneyItem() {
@@ -23,6 +24,10 @@ class MainActivity : AppCompatActivity() {
 
         moneyRow.tvMoneyTitle.text = binding.etMoneyName.text.toString()
         moneyRow.tvMoneyAmt.text = binding.etMoneyAmount.text.toString()
+
+        moneyRow.btnDelete.setOnClickListener {
+            binding.root.removeView(moneyRow.root)
+        }
 
         binding.root.addView(moneyRow.root)
     }

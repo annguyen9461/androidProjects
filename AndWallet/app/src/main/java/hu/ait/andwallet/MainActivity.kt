@@ -66,6 +66,12 @@ class MainActivity : AppCompatActivity() {
 
         moneyRow.btnDelete.setOnClickListener {
             binding.layoutContent.removeView(moneyRow.root)
+            if (moneyRow.tvMoneyTitle.text == "Expense   ") {
+                totalExpense = totalExpense - moneyRow.tvMoneyAmt.length()
+            } else {
+                totalIncome = totalIncome - moneyRow.tvMoneyAmt.length()
+            }
+            balance = totalIncome - totalExpense
         }
 
         if (binding.cbIsExpense.isChecked) {

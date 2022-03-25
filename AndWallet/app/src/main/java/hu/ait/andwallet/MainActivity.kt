@@ -1,5 +1,6 @@
 package hu.ait.andwallet
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import hu.ait.andwallet.databinding.ActivityMainBinding
@@ -24,6 +25,13 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 binding.etMoneyAmount.error = "Error: ${e.message}"
             }
+        }
+
+        binding.btnSummary.setOnClickListener {
+            val intentSummary = Intent()
+            intentSummary.setClass(this,
+                SummaryActivity::class.java)
+            startActivity(intentSummary)
         }
     }
 

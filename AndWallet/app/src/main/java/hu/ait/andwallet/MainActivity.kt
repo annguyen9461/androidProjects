@@ -26,9 +26,15 @@ class MainActivity : AppCompatActivity() {
         moneyRow.tvMoneyAmt.text = binding.etMoneyAmount.text.toString()
 
         moneyRow.btnDelete.setOnClickListener {
-            binding.root.removeView(moneyRow.root)
+            binding.layoutContent.removeView(moneyRow.root)
         }
 
-        binding.root.addView(moneyRow.root)
+        if (binding.cbIsExpense.isChecked) {
+            moneyRow.ivIcon.setImageResource(R.drawable.expense)
+        } else {
+            moneyRow.ivIcon.setImageResource(R.drawable.income)
+        }
+
+        binding.layoutContent.addView(moneyRow.root)
     }
 }

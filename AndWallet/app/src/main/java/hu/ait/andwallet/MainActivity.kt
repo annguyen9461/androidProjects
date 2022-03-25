@@ -19,13 +19,12 @@ class MainActivity : AppCompatActivity() {
                     addNewMoneyItem()
                 }
                 else {
-                    binding.etMoneyAmount.error = "This field can not be empty!"
+                    binding.etMoneyAmount.error = "Amount of money field can not be empty!"
                 }
             } catch (e: Exception) {
                 binding.etMoneyAmount.error = "Error: ${e.message}"
             }
         }
-
     }
 
     private fun addNewMoneyItem() {

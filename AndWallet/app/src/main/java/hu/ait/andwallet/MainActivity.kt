@@ -14,14 +14,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSave.setOnClickListener() {
-            addNewMoneyItem()
+            try {
+                if (binding.etMoneyAmount.text.isNotEmpty()) {
+                    addNewMoneyItem()
+                }
+                else {
+                    binding.etMoneyAmount.error = "This field can not be empty!"
+                }
+            } catch (e: Exception) {
+                binding.etMoneyAmount.error = "Error: ${e.message}"
+            }
         }
 
     }
 
     private fun addNewMoneyItem() {
         val moneyRow = MoneyRowBinding.inflate(layoutInflater)
-
 
         moneyRow.btnDelete.setOnClickListener {
             binding.layoutContent.removeView(moneyRow.root)

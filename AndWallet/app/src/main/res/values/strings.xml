@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">AndWallet</string>
+    <string name="income_or_expense">Income or Expense?</string>
+    <string name="save">save</string>
+    <string name="an_expense">an expense</string>
+    <string name="amount_of_money">Amount of money</string>
+    <string name="income">Income:</string>
+    <string name="balance">Balance:</string>
+    <string name="expense">Expense:</string>
+    <string name="this_view_shows_your_current_balance">This view shows your current balance</string>
+    <string name="andwallet">ANDWALLET</string>
 </resources>

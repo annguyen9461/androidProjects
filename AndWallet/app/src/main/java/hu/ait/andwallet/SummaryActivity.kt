@@ -16,10 +16,6 @@ class SummaryActivity : AppCompatActivity() {
         binding = ActivitySummaryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        if (intent.hasExtra(MainActivity.KEY_DATA)) {
-//            binding.tvIncome.text = intent.getStringExtra(MainActivity.KEY_DATA)
-//            binding.tvIncome.append(DataManager.data.get(0))
-//        }
         if (intent.hasExtra("KEY_EXPENSE")) {
             binding.tvExpense.text = intent.getStringExtra(MainActivity.KEY_EXPENSE)
         }

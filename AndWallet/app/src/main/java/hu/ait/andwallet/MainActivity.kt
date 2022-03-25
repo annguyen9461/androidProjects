@@ -89,5 +89,6 @@ class MainActivity : AppCompatActivity() {
         moneyRow.tvMoneyTitle.text = binding.etMoneyName.text.toString()
         moneyRow.tvMoneyAmt.text = binding.etMoneyAmount.text.toString()
 
-        binding.layoutContent.addView(moneyRow.root)    }
+        binding.layoutContent.addView(moneyRow.root)
+    }
 }

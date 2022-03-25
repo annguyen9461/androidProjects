@@ -16,7 +16,7 @@
             android:layout_width="190dp"
             android:layout_height="43dp"
             android:editable="false"
-            android:hint="Income or Expense?"
+            android:hint="@string/income_or_expense"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline2"></EditText>
 
@@ -24,7 +24,7 @@
             android:id="@+id/etMoneyAmount"
             android:layout_width="141dp"
             android:layout_height="43dp"
-            android:hint="Amount of money"
+            android:hint="@string/amount_of_money"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"></EditText>
@@ -55,7 +55,7 @@
             android:id="@+id/cbIsExpense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="an expense"
+            android:text="@string/an_expense"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
@@ -63,7 +63,7 @@
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="save"
+            android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"></Button>
 

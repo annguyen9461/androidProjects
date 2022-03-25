@@ -9,4 +9,6 @@
     <string name="expense">Expense:</string>
     <string name="this_view_shows_your_current_balance">This view shows your current balance</string>
     <string name="andwallet">ANDWALLET</string>
+    <string name="expense_space">\"Expense   \"</string>
+    <string name="income_space">\"Income   \"</string>
 </resources>

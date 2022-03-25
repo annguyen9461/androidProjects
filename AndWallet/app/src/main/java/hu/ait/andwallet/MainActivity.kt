@@ -5,8 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import hu.ait.andwallet.databinding.ActivityMainBinding
 import hu.ait.andwallet.databinding.MoneyRowBinding
 
@@ -67,9 +65,9 @@ class MainActivity : AppCompatActivity() {
         moneyRow.btnDelete.setOnClickListener {
             binding.layoutContent.removeView(moneyRow.root)
             if (moneyRow.tvMoneyTitle.text == "Expense   ") {
-                totalExpense = totalExpense - moneyRow.tvMoneyAmt.length()
+                totalExpense = totalExpense - moneyRow.tvMoneyAmt.text.toString().toShort()
             } else {
-                totalIncome = totalIncome - moneyRow.tvMoneyAmt.length()
+                totalIncome = totalIncome - moneyRow.tvMoneyAmt.text.toString().toShort()
             }
             balance = totalIncome - totalExpense
         }
@@ -77,11 +75,11 @@ class MainActivity : AppCompatActivity() {
         if (binding.cbIsExpense.isChecked) {
             moneyRow.ivIcon.setImageResource(R.drawable.expense)
             binding.etMoneyName.setText("Expense   ")
-            totalExpense = totalExpense + binding.etMoneyAmount.length()
+            totalExpense = totalExpense + binding.etMoneyAmount.text.toString().toShort()
         } else {
             moneyRow.ivIcon.setImageResource(R.drawable.income)
             binding.etMoneyName.setText("Income   ")
-            totalIncome = totalIncome + binding.etMoneyAmount.length()
+            totalIncome = totalIncome + binding.etMoneyAmount.text.toString().toShort()
         }
 
         balance = totalIncome - totalExpense

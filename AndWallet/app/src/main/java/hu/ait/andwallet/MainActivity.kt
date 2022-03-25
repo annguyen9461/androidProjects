@@ -76,11 +76,11 @@ class MainActivity : AppCompatActivity() {
 
         if (binding.cbIsExpense.isChecked) {
             moneyRow.ivIcon.setImageResource(R.drawable.expense)
-            binding.etMoneyName.setText(getString(R.string.expense_space))
+            binding.etMoneyName.setText("Expense   ")
             totalExpense = totalExpense + binding.etMoneyAmount.length()
         } else {
             moneyRow.ivIcon.setImageResource(R.drawable.income)
-            binding.etMoneyName.setText(getString(R.string.income_space))
+            binding.etMoneyName.setText("Income   ")
             totalIncome = totalIncome + binding.etMoneyAmount.length()
         }
 

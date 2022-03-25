@@ -16,6 +16,7 @@
             android:layout_width="190dp"
             android:layout_height="43dp"
             android:hint="Income or Expense?"
+            android:editable="false"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline2"></EditText>
 

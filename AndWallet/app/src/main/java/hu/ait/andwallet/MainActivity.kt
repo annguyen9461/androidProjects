@@ -22,8 +22,6 @@ class MainActivity : AppCompatActivity() {
     private fun addNewMoneyItem() {
         val moneyRow = MoneyRowBinding.inflate(layoutInflater)
 
-        moneyRow.tvMoneyTitle.text = binding.etMoneyName.text.toString()
-        moneyRow.tvMoneyAmt.text = binding.etMoneyAmount.text.toString()
 
         moneyRow.btnDelete.setOnClickListener {
             binding.layoutContent.removeView(moneyRow.root)
@@ -31,9 +29,14 @@ class MainActivity : AppCompatActivity() {
 
         if (binding.cbIsExpense.isChecked) {
             moneyRow.ivIcon.setImageResource(R.drawable.expense)
+            binding.etMoneyName.setText("Expense   ")
         } else {
             moneyRow.ivIcon.setImageResource(R.drawable.income)
+            binding.etMoneyName.setText("Income   ")
         }
+
+        moneyRow.tvMoneyTitle.text = binding.etMoneyName.text.toString()
+        moneyRow.tvMoneyAmt.text = binding.etMoneyAmount.text.toString()
 
         binding.layoutContent.addView(moneyRow.root)
     }

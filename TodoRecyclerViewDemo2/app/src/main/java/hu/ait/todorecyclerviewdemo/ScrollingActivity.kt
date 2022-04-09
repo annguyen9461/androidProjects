@@ -8,11 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import hu.ait.todorecyclerviewdemo.adapter.TodoAdapter
+import hu.ait.todorecyclerviewdemo.data.Todo
 import hu.ait.todorecyclerviewdemo.databinding.ActivityScrollingBinding
 
 class ScrollingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityScrollingBinding
+    private lateinit var adapter: TodoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +25,11 @@ class ScrollingActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            adapter.addTodo(Todo("2022 . 03. 21",false,"Demo"))
         }
 
-        binding.recyclerTodo.adapter = TodoAdapter(this)
+        adapter = TodoAdapter(this)
+        binding.recyclerTodo.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

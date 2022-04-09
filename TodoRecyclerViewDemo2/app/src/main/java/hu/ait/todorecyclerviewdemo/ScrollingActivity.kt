@@ -10,8 +10,9 @@ import android.view.MenuItem
 import hu.ait.todorecyclerviewdemo.adapter.TodoAdapter
 import hu.ait.todorecyclerviewdemo.data.Todo
 import hu.ait.todorecyclerviewdemo.databinding.ActivityScrollingBinding
+import hu.ait.todorecyclerviewdemo.dialog.TodoDialog
 
-class ScrollingActivity : AppCompatActivity() {
+class ScrollingActivity : AppCompatActivity(), TodoDialog.TodoHandler {
 
     private lateinit var binding: ActivityScrollingBinding
     private lateinit var adapter: TodoAdapter
@@ -25,11 +26,17 @@ class ScrollingActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
         binding.fab.setOnClickListener { view ->
-            adapter.addTodo(Todo("2022 . 03. 21",false,"Demo"))
+//            adapter.addTodo(Todo("2022 . 03. 21",false,"Demo"))
+
+            TodoDialog().show(supportFragmentManager,"TODO_DIALOG")
         }
 
         adapter = TodoAdapter(this)
         binding.recyclerTodo.adapter = adapter
+    }
+
+    override fun todoCreated(todo: Todo) {
+        adapter.addTodo(todo)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -37,6 +37,12 @@ class ScrollingActivity : AppCompatActivity(), TodoDialog.TodoHandler {
 
     override fun todoCreated(todo: Todo) {
         adapter.addTodo(todo)
+
+        Snackbar.make(binding.root, "Todo created",Snackbar.LENGTH_LONG)
+            .setAction("Undo") {
+                adapter.deleteLastItem()
+            }
+            .show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import hu.ait.todorecyclerviewdemo.adapter.TodoAdapter
 import hu.ait.todorecyclerviewdemo.data.Todo
 import hu.ait.todorecyclerviewdemo.databinding.ActivityScrollingBinding
@@ -38,6 +39,8 @@ class ScrollingActivity : AppCompatActivity(), TodoDialog.TodoHandler {
         val decorator =  DividerItemDecoration(this,
             DividerItemDecoration.VERTICAL)
         binding.recyclerTodo.addItemDecoration(decorator)
+
+        binding.recyclerTodo.layoutManager = GridLayoutManager(this, 2)
     }
 
     override fun todoCreated(todo: Todo) {

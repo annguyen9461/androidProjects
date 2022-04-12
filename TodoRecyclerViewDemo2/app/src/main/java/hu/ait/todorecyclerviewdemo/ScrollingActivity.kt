@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import hu.ait.todorecyclerviewdemo.adapter.TodoAdapter
+import hu.ait.todorecyclerviewdemo.data.AppDatabase
 import hu.ait.todorecyclerviewdemo.data.Todo
 import hu.ait.todorecyclerviewdemo.databinding.ActivityScrollingBinding
 import hu.ait.todorecyclerviewdemo.dialog.TodoDialog
 import hu.ait.todorecyclerviewdemo.touch.TodoReyclerTouchCallback
+import kotlin.concurrent.thread
 
 class ScrollingActivity : AppCompatActivity(), TodoDialog.TodoHandler {
 
@@ -50,13 +52,19 @@ class ScrollingActivity : AppCompatActivity(), TodoDialog.TodoHandler {
     }
 
     override fun todoCreated(todo: Todo) {
-        adapter.addTodo(todo)
+        thread {
+            AppDatabase.getInstance(this).todoDAO().insertTodo(todo)
+            runOnUiThread {
+                adapter.addTodo(todo)
 
-        Snackbar.make(binding.root, "Todo created",Snackbar.LENGTH_LONG)
-            .setAction("Undo") {
-                adapter.deleteLastItem()
+                Snackbar.make(binding.root, "Todo created",Snackbar.LENGTH_LONG)
+                    .setAction("Undo") {
+                        adapter.deleteLastItem()
+                    }
+                    .show()
             }
-            .show()
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

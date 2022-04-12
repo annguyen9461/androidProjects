@@ -1,14 +1,10 @@
 package hu.ait.todorecyclerviewdemo
 
 import android.os.Bundle
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import hu.ait.todorecyclerviewdemo.adapter.TodoAdapter
 import hu.ait.todorecyclerviewdemo.data.AppDatabase
@@ -37,23 +33,28 @@ class ScrollingActivity : AppCompatActivity(), TodoDialog.TodoHandler {
             TodoDialog().show(supportFragmentManager,"TODO_DIALOG")
         }
 
-        adapter = TodoAdapter(this)
-        binding.recyclerTodo.adapter = adapter
+        initRecyclerView()
+    }
 
-//        val decorator =  DividerItemDecoration(this,
-//            DividerItemDecoration.VERTICAL)
-//        binding.recyclerTodo.addItemDecoration(decorator)
+    private fun initRecyclerView() {
+        thread {
+            val todoItems = AppDatabase.getInstance(this).todoDao().getAllTodos()
 
-//        binding.recyclerTodo.layoutManager = GridLayoutManager(this, 2)
+            runOnUiThread {
+                adapter = TodoAdapter(this, todoItems)
+                binding.recyclerTodo.adapter = adapter
 
-        val touchCallbakList = TodoReyclerTouchCallback(adapter)
-        val itemTouchHelper = ItemTouchHelper(touchCallbakList)
-        itemTouchHelper.attachToRecyclerView(binding.recyclerTodo)
+                val touchCallbakList = TodoReyclerTouchCallback(adapter)
+                val itemTouchHelper = ItemTouchHelper(touchCallbakList)
+                itemTouchHelper.attachToRecyclerView(binding.recyclerTodo)
+            }
+        }
+
     }
 
     override fun todoCreated(todo: Todo) {
         thread {
-            AppDatabase.getInstance(this).todoDAO().insertTodo(todo)
+            AppDatabase.getInstance(this).todoDao().insertTodo(todo)
             runOnUiThread {
                 adapter.addTodo(todo)
 

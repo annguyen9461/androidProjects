@@ -5,5 +5,5 @@ data class ShoppingItem(
     var price: Int,
     var description: String,
     var category: Int,
-    var bought: Boolean
+    var isBought: Boolean
 )

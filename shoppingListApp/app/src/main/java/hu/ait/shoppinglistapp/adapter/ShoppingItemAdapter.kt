@@ -9,14 +9,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hu.ait.shoppinglistapp.R
 import hu.ait.shoppinglistapp.data.ShoppingItem
+import hu.ait.shoppinglistapp.databinding.ShoppingRowBinding
 
-class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder>{
+class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder> {
 
     var shoppingItems = mutableListOf<ShoppingItem>(
         ShoppingItem("pizza", 10, "fast food", 0, false),
         ShoppingItem("broccoli", 10, "healthy food", 10, true)
     )
-    val context : Context
+    val context: Context
+
     constructor(context: Context) : super() {
         this.context = context
     }
@@ -26,28 +28,27 @@ class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(
-            R.layout.shopping_row, parent, false
+        val shoppingBinding = ShoppingRowBinding.inflate(
+            LayoutInflater.from(context),
+            parent, false
         )
-        return ViewHolder(view)
+        return ViewHolder(shoppingBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val shopping = shoppingItems[position]
-
-        holder.tvName.text = shopping.name
-        holder.tvPrice.text = shopping.price.toString()
-        holder.tvDescription.text = shopping.description
-        holder.tvCategory.text = shopping.category.toString()
-        holder.cbBought.isChecked = shopping.bought
+        holder.bind(shopping)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvName: TextView = itemView.findViewById(R.id.tvName)
-        val tvPrice: TextView = itemView.findViewById(R.id.tvPrice)
-        val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
-        val tvCategory: TextView = itemView.findViewById(R.id.tvCategory)
-        val cbBought: CheckBox = itemView.findViewById(R.id.cbBought)
+    inner class ViewHolder(var binding: ShoppingRowBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(shopping: ShoppingItem) {
+            binding.tvName.text = shopping.name
+            binding.tvPrice.text = shopping.price.toString()
+            binding.tvDescription.text = shopping.description
+            binding.tvCategory.text = shopping.category.toString()
+            binding.cbBought.isChecked = shopping.isBought
+        }
     }
 
 }

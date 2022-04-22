@@ -59,7 +59,8 @@ class ShoppingDialog : DialogFragment() {
         if (isEditMode) {
             val shoppingToEdit =
                 requireArguments().getSerializable(
-                    ScrollingActivity.KEY_SHOPPING_EDIT) as ShoppingItem
+                    ScrollingActivity.KEY_SHOPPING_EDIT
+                ) as ShoppingItem
 
             binding.etShoppingItemName.setText(shoppingToEdit.name)
             binding.etShoppingItemPrice.setText(shoppingToEdit.price)
@@ -71,14 +72,15 @@ class ShoppingDialog : DialogFragment() {
         dialogBuilder.setPositiveButton("Ok") { dialog, which ->
             if (isEditMode) {
                 val shoppingToEdit =
-                    requireArguments().getSerializable(
-                        ScrollingActivity.KEY_SHOPPING_EDIT) as ShoppingItem
-
-                shoppingToEdit.name = binding.etShoppingItemName.text.toString()
-                shoppingToEdit.price = binding.etShoppingItemPrice.text.toString()
-                shoppingToEdit.description = binding.etShoppingItemDescription.text.toString()
-                shoppingToEdit.category = binding.etShoppingItemCategory.text.toString()
-                shoppingToEdit.isBought = binding.cbShoppingItemBought.isChecked
+                    (requireArguments().getSerializable(
+                        ScrollingActivity.KEY_SHOPPING_EDIT
+                    ) as ShoppingItem).copy(
+                        name = binding.etShoppingItemName.text.toString(),
+                        price = binding.etShoppingItemPrice.text.toString(),
+                        description = binding.etShoppingItemDescription.text.toString(),
+                        category = binding.etShoppingItemCategory.text.toString(),
+                        isBought = binding.cbShoppingItemBought.isChecked
+                    )
 
                 shoppingHandler.updateShopping(shoppingToEdit)
             } else {

@@ -2,8 +2,8 @@ package hu.ait.shoppinglistapp.data
 
 data class ShoppingItem(
     var name: String,
-    var price: Int,
+    var price: String,
     var description: String,
-    var category: Int,
+    var category: String,
     var isBought: Boolean
 )

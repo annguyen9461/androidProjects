@@ -14,8 +14,8 @@ import hu.ait.shoppinglistapp.databinding.ShoppingRowBinding
 class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder> {
 
     var shoppingItems = mutableListOf<ShoppingItem>(
-        ShoppingItem("pizza", 10, "fast food", 0, false),
-        ShoppingItem("broccoli", 10, "healthy food", 10, true)
+        ShoppingItem("pizza", "10", "fast food", "0", false),
+        ShoppingItem("broccoli", "10", "healthy food", "0", true)
     )
     val context: Context
 
@@ -44,8 +44,6 @@ class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder>
         val shopping = shoppingItems[position]
         holder.bind(shopping)
     }
-
-
 
     inner class ViewHolder(var binding: ShoppingRowBinding) :
         RecyclerView.ViewHolder(binding.root) {

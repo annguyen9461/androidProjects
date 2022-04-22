@@ -5,8 +5,28 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/etShoppongText"
-        android:hint="Enter shopping item here"
+        android:id="@+id/etShoppingItemName"
+        android:hint="Enter item name here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/etShoppingItemPrice"
+        android:inputType="number"
+        android:hint="Enter item price here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/etShoppingItemDescription"
+        android:hint="Enter item description here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/etShoppingItemCategory"
+        android:inputType="number"
+        android:hint="Enter item category here"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

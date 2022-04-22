@@ -26,7 +26,7 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
         binding.fab.setOnClickListener { view ->
-            adapter.addShopping(ShoppingItem("demo", 10, "fast food", 0, false))
+            adapter.addShopping(ShoppingItem("demo", "10", "fast food", "0", false))
         }
 
         adapter = ShoppingItemAdapter(this)

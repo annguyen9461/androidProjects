@@ -8,8 +8,11 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hu.ait.shoppinglistapp.R
+import hu.ait.shoppinglistapp.ScrollingActivity
+import hu.ait.shoppinglistapp.data.AppDatabase
 import hu.ait.shoppinglistapp.data.ShoppingItem
 import hu.ait.shoppinglistapp.databinding.ShoppingRowBinding
+import kotlin.concurrent.thread
 
 class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder> {
 
@@ -45,13 +48,28 @@ class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder>
     }
 
     fun deleteItem(idx: Int) {
-        shoppingItems.removeAt(idx)
-        notifyItemRemoved(idx)
+        thread{
+            AppDatabase.getInstance(context).shoppingDao().deleteShoppingItem(shoppingItems[idx])
+
+            (context as ScrollingActivity).runOnUiThread {
+                shoppingItems.removeAt(idx)
+                notifyItemRemoved(idx)
+            }
+        }
     }
 
+
     fun deleteLastItem() {
-        shoppingItems.removeLast()
-        notifyItemRemoved(shoppingItems.lastIndex+1)
+//        shoppingItems.removeLast()
+//        notifyItemRemoved(shoppingItems.lastIndex+1)
+        thread{
+            AppDatabase.getInstance(context).shoppingDao().deleteShoppingItem(shoppingItems[shoppingItems.lastIndex+1])
+
+            (context as ScrollingActivity).runOnUiThread {
+                shoppingItems.removeLast()
+                notifyItemRemoved(shoppingItems.lastIndex+1)
+            }
+        }
     }
 
     inner class ViewHolder(var binding: ShoppingRowBinding) :

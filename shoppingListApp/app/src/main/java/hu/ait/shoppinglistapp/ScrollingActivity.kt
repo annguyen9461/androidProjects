@@ -33,10 +33,12 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
         binding.fab.setOnClickListener { view ->
-//            adapter.addShopping(ShoppingItem("demo", "10", "fast food", "0", false))
-
             ShoppingDialog().show(supportFragmentManager, "SHOPPING_DIALOG")
-
+        }
+        binding.btnDeleteAll.setOnClickListener {
+            thread {
+                AppDatabase.getInstance(this@ScrollingActivity).shoppingDao().deleteAll()
+            }
         }
 
         initRecyclerView()
@@ -65,14 +67,6 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
     override fun shoppingItemCreated(shoppingItem: ShoppingItem) {
         thread {
             AppDatabase.getInstance(this).shoppingDao().insertShoppingItem(shoppingItem)
-
-            runOnUiThread {
-                Snackbar.make(binding.root, "Shopping item created", Snackbar.LENGTH_LONG)
-                    .setAction("Undo") {
-                        adapter.deleteLastItem()
-                    }
-                    .show()
-            }
         }
     }
 

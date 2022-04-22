@@ -65,6 +65,7 @@ class ShoppingItemAdapter(var context: Context) :
                 )
             }
 
+
             binding.cbBought.setOnClickListener {
                 val currentItem = getItem(adapterPosition)
                 currentItem.isBought = binding.cbBought.isChecked

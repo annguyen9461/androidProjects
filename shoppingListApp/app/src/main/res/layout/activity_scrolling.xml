@@ -51,6 +51,17 @@
         android:layout_marginEnd="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:contentDescription="@string/addItem"
+        app:icon="@color/black"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btnDeleteAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|right"
+        android:contentDescription="@string/deleteAll"
+        android:text="Delete All"
+        app:icon="@color/white"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

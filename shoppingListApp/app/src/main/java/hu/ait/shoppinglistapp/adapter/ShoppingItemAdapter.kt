@@ -2,14 +2,17 @@ package hu.ait.shoppinglistapp.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import hu.ait.shoppinglistapp.DetailsActivity
 import hu.ait.shoppinglistapp.R
 import hu.ait.shoppinglistapp.ScrollingActivity
 import hu.ait.shoppinglistapp.data.AppDatabase
@@ -65,6 +68,14 @@ class ShoppingItemAdapter(var context: Context) :
                 )
             }
 
+            binding.btnDetails.setOnClickListener {
+                val intentDetails = Intent()
+                intentDetails.setClass(
+                    (context as ScrollingActivity),
+                    DetailsActivity::class.java
+                )
+                (context as ScrollingActivity).startActivity(intentDetails)
+            }
 
             binding.cbBought.setOnClickListener {
                 val currentItem = getItem(adapterPosition)

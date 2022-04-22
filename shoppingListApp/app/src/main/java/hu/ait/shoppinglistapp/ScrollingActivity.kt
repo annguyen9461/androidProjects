@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import hu.ait.shoppinglistapp.adapter.ShoppingItemAdapter
 import hu.ait.shoppinglistapp.data.AppDatabase

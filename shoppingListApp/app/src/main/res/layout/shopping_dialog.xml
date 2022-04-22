@@ -18,15 +18,15 @@
         android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/etShoppingItemDescription"
-        android:hint="Enter item description here"
+        android:id="@+id/etShoppingItemCategory"
+        android:inputType="number"
+        android:hint="Enter item category here"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/etShoppingItemCategory"
-        android:inputType="number"
-        android:hint="Enter item category here"
+        android:id="@+id/etShoppingItemDescription"
+        android:hint="Enter item description here"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

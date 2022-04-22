@@ -35,24 +35,33 @@ class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder>
         return ViewHolder(shoppingBinding)
     }
 
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val shopping = shoppingItems[position]
+        holder.bind(shopping)
+    }
+
     fun addShopping(newShoppingItem: ShoppingItem) {
         shoppingItems.add(newShoppingItem)
         notifyItemInserted(shoppingItems.lastIndex)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val shopping = shoppingItems[position]
-        holder.bind(shopping)
+    fun deleteItem(idx: Int) {
+        shoppingItems.removeAt(idx)
+        notifyItemRemoved(idx)
     }
 
     inner class ViewHolder(var binding: ShoppingRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(shopping: ShoppingItem) {
             binding.tvName.text = shopping.name
-            binding.tvPrice.text = shopping.price.toString()
+            binding.tvPrice.text = shopping.price
             binding.tvDescription.text = shopping.description
-            binding.tvCategory.text = shopping.category.toString()
+            binding.tvCategory.text = shopping.category
             binding.cbBought.isChecked = shopping.isBought
+
+            binding.btnDelete.setOnClickListener {
+                deleteItem(this.adapterPosition)
+            }
         }
     }
 

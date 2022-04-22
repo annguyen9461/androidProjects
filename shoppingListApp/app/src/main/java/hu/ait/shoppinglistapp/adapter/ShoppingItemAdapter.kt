@@ -58,6 +58,12 @@ class ShoppingItemAdapter(var context: Context) :
             binding.btnDelete.setOnClickListener {
                 deleteItem(this.adapterPosition)
             }
+
+            binding.btnEdit.setOnClickListener {
+                (context as ScrollingActivity).showEditDialog(
+                    getItem(this.adapterPosition)
+                )
+            }
         }
     }
 

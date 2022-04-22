@@ -20,6 +20,10 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
     private lateinit var binding: ActivityScrollingBinding
     private lateinit var adapter: ShoppingItemAdapter
 
+    companion object {
+        const val KEY_SHOPPING_EDIT = "KEY_SHOPPING_EDIT"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,6 +52,16 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
         })
     }
 
+    fun showEditDialog(shoppingToEdit: ShoppingItem) {
+        val dialog = ShoppingDialog()
+
+        val bundle = Bundle()
+        bundle.putSerializable(KEY_SHOPPING_EDIT, shoppingToEdit)
+        dialog.arguments = bundle
+
+        dialog.show(supportFragmentManager, "TAG_ITEM_EDIT")
+    }
+
     override fun shoppingItemCreated(shoppingItem: ShoppingItem) {
         thread {
             AppDatabase.getInstance(this).shoppingDao().insertShoppingItem(shoppingItem)
@@ -59,6 +73,12 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
                     }
                     .show()
             }
+        }
+    }
+
+    override fun updateShopping(shoppingItem: ShoppingItem) {
+        thread {
+            AppDatabase.getInstance(this).shoppingDao().updateShopping(shoppingItem)
         }
     }
 

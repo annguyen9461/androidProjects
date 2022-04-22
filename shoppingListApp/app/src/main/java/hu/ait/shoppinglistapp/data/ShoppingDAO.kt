@@ -1,10 +1,7 @@
 package hu.ait.shoppinglistapp.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface ShoppingDAO {
@@ -17,5 +14,8 @@ interface ShoppingDAO {
 
     @Delete
     fun deleteShoppingItem(shoppingItem: ShoppingItem)
+
+    @Update
+    fun updateShopping(shoppingItem: ShoppingItem)
 
 }

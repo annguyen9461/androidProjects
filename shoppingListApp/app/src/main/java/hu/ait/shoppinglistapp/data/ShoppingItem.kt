@@ -3,6 +3,7 @@ package hu.ait.shoppinglistapp.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "shoppingtable")
 data class ShoppingItem(
@@ -12,4 +13,4 @@ data class ShoppingItem(
     @ColumnInfo(name = "description") var description: String,
     @ColumnInfo(name = "category") var category: String,
     @ColumnInfo(name = "isBought") var isBought: Boolean
-)
+) : Serializable

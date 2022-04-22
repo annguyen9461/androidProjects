@@ -8,11 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import hu.ait.shoppinglistapp.adapter.ShoppingItemAdapter
+import hu.ait.shoppinglistapp.data.ShoppingItem
 import hu.ait.shoppinglistapp.databinding.ActivityScrollingBinding
+import hu.ait.shoppinglistapp.dialog.ShoppingDialog
 
-class ScrollingActivity : AppCompatActivity() {
+class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
 
     private lateinit var binding: ActivityScrollingBinding
+    private lateinit var adapter: ShoppingItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +26,15 @@ class ScrollingActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            adapter.addShopping(ShoppingItem("demo", 10, "fast food", 0, false))
         }
 
-        binding.recyclerShoppingItem.adapter = ShoppingItemAdapter(this)
+        adapter = ShoppingItemAdapter(this)
+        binding.recyclerShoppingItem.adapter = adapter
+    }
+
+    override fun shoppingItemCreated(shoppingItem: ShoppingItem) {
+        adapter.addShopping(shoppingItem)
     }
 
 }

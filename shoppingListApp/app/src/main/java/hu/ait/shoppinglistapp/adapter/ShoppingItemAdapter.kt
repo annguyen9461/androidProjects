@@ -35,10 +35,17 @@ class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder>
         return ViewHolder(shoppingBinding)
     }
 
+    fun addShopping(newShoppingItem: ShoppingItem) {
+        shoppingItems.add(newShoppingItem)
+        notifyItemInserted(shoppingItems.lastIndex)
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val shopping = shoppingItems[position]
         holder.bind(shopping)
     }
+
+
 
     inner class ViewHolder(var binding: ShoppingRowBinding) :
         RecyclerView.ViewHolder(binding.root) {

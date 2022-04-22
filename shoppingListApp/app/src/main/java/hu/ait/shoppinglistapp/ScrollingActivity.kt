@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.Observer
 import hu.ait.shoppinglistapp.adapter.ShoppingItemAdapter
 import hu.ait.shoppinglistapp.data.AppDatabase
 import hu.ait.shoppinglistapp.data.ShoppingItem
@@ -30,7 +31,7 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
         binding.fab.setOnClickListener { view ->
 //            adapter.addShopping(ShoppingItem("demo", "10", "fast food", "0", false))
 
-            ShoppingDialog().show(supportFragmentManager,"SHOPPING_DIALOG")
+            ShoppingDialog().show(supportFragmentManager, "SHOPPING_DIALOG")
 
         }
 
@@ -38,15 +39,13 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
     }
 
     private fun initRecyclerView() {
-        thread {
-            val shoppingItems = AppDatabase.getInstance(this).shoppingDao().getAllShoppingItems()
 
-            runOnUiThread {
-                adapter = ShoppingItemAdapter(this, shoppingItems)
-                binding.recyclerShoppingItem.adapter = adapter
-            }
-        }
-
+        adapter = ShoppingItemAdapter(this)
+        binding.recyclerShoppingItem.adapter = adapter
+        val shoppingItems = AppDatabase.getInstance(this).shoppingDao().getAllShoppingItems()
+        shoppingItems.observe(this, Observer { items ->
+            adapter.submitList(items)
+        })
     }
 
     override fun shoppingItemCreated(shoppingItem: ShoppingItem) {
@@ -54,8 +53,6 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
             AppDatabase.getInstance(this).shoppingDao().insertShoppingItem(shoppingItem)
 
             runOnUiThread {
-                adapter.addShopping(shoppingItem)
-
                 Snackbar.make(binding.root, "Shopping item created", Snackbar.LENGTH_LONG)
                     .setAction("Undo") {
                         adapter.deleteLastItem()

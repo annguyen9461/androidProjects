@@ -1,11 +1,14 @@
 package hu.ait.shoppinglistapp.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hu.ait.shoppinglistapp.R
 import hu.ait.shoppinglistapp.ScrollingActivity
@@ -14,20 +17,10 @@ import hu.ait.shoppinglistapp.data.ShoppingItem
 import hu.ait.shoppinglistapp.databinding.ShoppingRowBinding
 import kotlin.concurrent.thread
 
-class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder> {
-
-    var shoppingItems = mutableListOf<ShoppingItem>()
-    val context: Context
-
-    constructor(context: Context, shoppingList: List<ShoppingItem>) : super() {
-        this.context = context
-
-        shoppingItems.addAll(shoppingList)
-    }
-
-    override fun getItemCount(): Int {
-        return shoppingItems.size
-    }
+class ShoppingItemAdapter(var context: Context) :
+    ListAdapter<ShoppingItem, ShoppingItemAdapter.ViewHolder>(
+        ShoppingDiffCallback()
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val shoppingBinding = ShoppingRowBinding.inflate(
@@ -38,38 +31,19 @@ class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val shopping = shoppingItems[position]
+        val shopping = getItem(position)
         holder.bind(shopping)
     }
 
-    fun addShopping(newShoppingItem: ShoppingItem) {
-        shoppingItems.add(newShoppingItem)
-        notifyItemInserted(shoppingItems.lastIndex)
-    }
-
     fun deleteItem(idx: Int) {
-        thread{
-            AppDatabase.getInstance(context).shoppingDao().deleteShoppingItem(shoppingItems[idx])
-
-            (context as ScrollingActivity).runOnUiThread {
-                shoppingItems.removeAt(idx)
-                notifyItemRemoved(idx)
-            }
+        thread {
+            AppDatabase.getInstance(context).shoppingDao().deleteShoppingItem(getItem(idx))
         }
     }
-
 
     fun deleteLastItem() {
 //        shoppingItems.removeLast()
 //        notifyItemRemoved(shoppingItems.lastIndex+1)
-        thread{
-            AppDatabase.getInstance(context).shoppingDao().deleteShoppingItem(shoppingItems[shoppingItems.lastIndex+1])
-
-            (context as ScrollingActivity).runOnUiThread {
-                shoppingItems.removeLast()
-                notifyItemRemoved(shoppingItems.lastIndex+1)
-            }
-        }
     }
 
     inner class ViewHolder(var binding: ShoppingRowBinding) :
@@ -87,4 +61,15 @@ class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder>
         }
     }
 
+}
+
+class ShoppingDiffCallback : DiffUtil.ItemCallback<ShoppingItem>() {
+    override fun areItemsTheSame(oldItem: ShoppingItem, newItem: ShoppingItem): Boolean {
+        return oldItem.shoppingid == newItem.shoppingid
+    }
+
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: ShoppingItem, newItem: ShoppingItem): Boolean {
+        return oldItem == newItem
+    }
 }

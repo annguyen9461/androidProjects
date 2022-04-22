@@ -38,15 +38,11 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
     }
 
     private fun initRecyclerView() {
-//        val shoppingItems = AppDatabase.getInstance(this).shoppingDao().getAllShoppingItems()
-//        shoppingItems.observe(this, Observer { items ->
-//            adapter.submitList(items)
-//        })
         thread {
             val shoppingItems = AppDatabase.getInstance(this).shoppingDao().getAllShoppingItems()
 
             runOnUiThread {
-                adapter = ShoppingItemAdapter(this)
+                adapter = ShoppingItemAdapter(this, shoppingItems)
                 binding.recyclerShoppingItem.adapter = adapter
             }
         }

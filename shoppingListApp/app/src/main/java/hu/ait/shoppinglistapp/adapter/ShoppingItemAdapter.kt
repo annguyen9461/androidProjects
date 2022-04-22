@@ -16,8 +16,10 @@ class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder>
     var shoppingItems = mutableListOf<ShoppingItem>()
     val context: Context
 
-    constructor(context: Context) : super() {
+    constructor(context: Context, shoppingList: List<ShoppingItem>) : super() {
         this.context = context
+
+        shoppingItems.addAll(shoppingList)
     }
 
     override fun getItemCount(): Int {

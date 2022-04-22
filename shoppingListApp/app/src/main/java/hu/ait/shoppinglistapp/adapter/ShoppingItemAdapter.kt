@@ -64,6 +64,15 @@ class ShoppingItemAdapter(var context: Context) :
                     getItem(this.adapterPosition)
                 )
             }
+
+            binding.cbBought.setOnClickListener {
+                val currentItem = getItem(adapterPosition)
+                currentItem.isBought = binding.cbBought.isChecked
+
+                thread {
+                    AppDatabase.getInstance(context).shoppingDao().updateShopping(currentItem)
+                }
+            }
         }
     }
 

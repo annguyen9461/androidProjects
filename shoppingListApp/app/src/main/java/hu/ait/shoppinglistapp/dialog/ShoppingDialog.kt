@@ -43,6 +43,7 @@ class ShoppingDialog : DialogFragment() {
 
             shoppingHandler.shoppingItemCreated(
                 ShoppingItem(
+                    null,
                     binding.etShoppingItemName.text.toString(),
                     binding.etShoppingItemPrice.text.toString(),
                     binding.etShoppingItemDescription.text.toString(),

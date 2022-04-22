@@ -13,10 +13,7 @@ import hu.ait.shoppinglistapp.databinding.ShoppingRowBinding
 
 class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder> {
 
-    var shoppingItems = mutableListOf<ShoppingItem>(
-        ShoppingItem("pizza", "10", "fast food", "0", false),
-        ShoppingItem("broccoli", "10", "healthy food", "0", true)
-    )
+    var shoppingItems = mutableListOf<ShoppingItem>()
     val context: Context
 
     constructor(context: Context) : super() {
@@ -48,6 +45,11 @@ class ShoppingItemAdapter : RecyclerView.Adapter<ShoppingItemAdapter.ViewHolder>
     fun deleteItem(idx: Int) {
         shoppingItems.removeAt(idx)
         notifyItemRemoved(idx)
+    }
+
+    fun deleteLastItem() {
+        shoppingItems.removeLast()
+        notifyItemRemoved(shoppingItems.lastIndex+1)
     }
 
     inner class ViewHolder(var binding: ShoppingRowBinding) :

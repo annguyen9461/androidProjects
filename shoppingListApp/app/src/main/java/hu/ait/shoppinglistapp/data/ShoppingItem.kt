@@ -1,9 +1,15 @@
 package hu.ait.shoppinglistapp.data
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "shoppingtable")
 data class ShoppingItem(
-    var name: String,
-    var price: String,
-    var description: String,
-    var category: String,
-    var isBought: Boolean
+    @PrimaryKey(autoGenerate = true) val shoppingid: Long?,
+    @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "price") var price: String,
+    @ColumnInfo(name = "description") var description: String,
+    @ColumnInfo(name = "category") var category: String,
+    @ColumnInfo(name = "isBought") var isBought: Boolean
 )

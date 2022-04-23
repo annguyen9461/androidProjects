@@ -16,7 +16,6 @@ class ShoppingDialog : DialogFragment() {
 
     interface ShoppingHandler {
         fun shoppingItemCreated(shoppingItem: ShoppingItem)
-
         fun updateShopping(shoppingItem: ShoppingItem)
     }
 

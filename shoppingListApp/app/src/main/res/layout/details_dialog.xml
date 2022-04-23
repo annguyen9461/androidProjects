@@ -21,13 +21,13 @@
 
             <TextView
                 android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="149dp"
+                android:layout_height="82dp"
                 android:text="description"
                 android:textSize="24sp"
-                android:visibility="invisible"
-                card_view:layout_constraintBottom_toTopOf="@+id/guideline4"
-                card_view:layout_constraintStart_toStartOf="parent"/>
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="@+id/guideline3"
+                card_view:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvPrice"
@@ -43,27 +43,7 @@
                 android:id="@+id/tvCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:textSize="24sp"
-                android:visibility="invisible"/>
-
-            <ImageView
-                android:id="@+id/ivCategoryIcon"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:src="@mipmap/ic_launcher"
-                card_view:layout_constraintBottom_toTopOf="@+id/guideline5"
-                card_view:layout_constraintEnd_toStartOf="@+id/guideline3" />
-
-            <Button
-                android:id="@+id/btnEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Edit"
-                card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintStart_toStartOf="@+id/guideline3"
-                card_view:layout_constraintTop_toTopOf="@+id/guideline4" />
+                android:textSize="24sp" />
 
             <CheckBox
                 android:id="@+id/cbBought"
@@ -83,16 +63,6 @@
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete"
-                card_view:layout_constraintBottom_toTopOf="@+id/guideline2"
-                card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintStart_toStartOf="@+id/guideline3"
-                card_view:layout_constraintTop_toTopOf="parent" />
-
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
                 android:layout_width="wrap_content"
@@ -105,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                card_view:layout_constraintGuide_begin="218dp" />
+                card_view:layout_constraintGuide_begin="170dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"
@@ -120,16 +90,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 card_view:layout_constraintGuide_begin="100dp" />
-
-            <Button
-                android:id="@+id/btnDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="Details"
-                card_view:layout_constraintBottom_toTopOf="@+id/btnEdit"
-                card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintStart_toStartOf="@+id/guideline3"
-                card_view:layout_constraintTop_toBottomOf="@+id/btnDelete" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

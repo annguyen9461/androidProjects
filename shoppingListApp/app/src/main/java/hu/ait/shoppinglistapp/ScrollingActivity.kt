@@ -13,6 +13,7 @@ import hu.ait.shoppinglistapp.adapter.ShoppingItemAdapter
 import hu.ait.shoppinglistapp.data.AppDatabase
 import hu.ait.shoppinglistapp.data.ShoppingItem
 import hu.ait.shoppinglistapp.databinding.ActivityScrollingBinding
+import hu.ait.shoppinglistapp.dialog.DetailsDialog
 import hu.ait.shoppinglistapp.dialog.ShoppingDialog
 import kotlin.concurrent.thread
 
@@ -23,7 +24,7 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
 
     companion object {
         const val KEY_SHOPPING_EDIT = "KEY_SHOPPING_EDIT"
-        const val KEY_DETAILS_EDIT = "KEY_DETAILS_EDIT"
+        const val KEY_DETAILS = "KEY_DETAILS"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,13 +68,13 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
     }
 
     fun showDetailsDialog(detailsToShow: ShoppingItem) {
-        val dialog = ShoppingDialog()
+        val dialog = DetailsDialog()
 
         val bundle = Bundle()
-        bundle.putSerializable(KEY_DETAILS_EDIT, detailsToShow)
+        bundle.putSerializable(KEY_DETAILS, detailsToShow)
         dialog.arguments = bundle
 
-        dialog.show(supportFragmentManager, "TAG_ITEM_EDIT")
+        dialog.show(supportFragmentManager, "TAG_DETAILS_SHOW")
     }
 
     override fun shoppingItemCreated(shoppingItem: ShoppingItem) {
@@ -85,6 +86,12 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
     override fun updateShopping(shoppingItem: ShoppingItem) {
         thread {
             AppDatabase.getInstance(this).shoppingDao().updateShopping(shoppingItem)
+        }
+    }
+
+    fun showItemDetails(shoppingItem: ShoppingItem) {
+        thread {
+            AppDatabase.getInstance(this).shoppingDao().getAllShoppingItems()
         }
     }
 

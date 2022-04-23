@@ -76,7 +76,7 @@ class ShoppingDialog : DialogFragment() {
             ) {
                 binding.etShoppingItemName.error = "This field can not be empty"
                 binding.etShoppingItemPrice.error = "This field can not be empty"
-                Toast.makeText(context, "To add a new item, Name and Price cannot be empty",
+                Toast.makeText(context, "To add or edit an item, Name and Price cannot be empty",
                     Toast.LENGTH_LONG).show()
             } else {
                 if (isEditMode) {

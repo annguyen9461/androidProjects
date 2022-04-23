@@ -25,8 +25,16 @@ class DetailsDialog : DialogFragment() {
         binding = DetailsDialogBinding.inflate(requireActivity().layoutInflater)
         dialogBuilder.setView(binding.root)
 
-        dialogBuilder.setPositiveButton("Ok") { dialog, which ->
+        val detailsToShow =
+            requireArguments().getSerializable(
+                ScrollingActivity.KEY_DETAILS
+            ) as ShoppingItem
 
+        dialogBuilder.setPositiveButton("Ok") { dialog, which ->
+            binding.tvName.setText(detailsToShow.name)
+            binding.tvPrice.setText(detailsToShow.price)
+            binding.tvCategory.setText(detailsToShow.category)
+            binding.tvDescription.setText(detailsToShow.description)
         }
         dialogBuilder.setNegativeButton("Cancel") { dialog, which ->
         }

@@ -54,7 +54,7 @@ class ShoppingItemAdapter(var context: Context) :
             binding.tvName.text = shopping.name
             binding.tvPrice.text = shopping.price
             binding.tvDescription.text = shopping.description
-//            binding.tvCategory.text = shopping.category
+            binding.tvCategory.text = shopping.category
             binding.cbBought.isChecked = shopping.isBought
 
             binding.btnDelete.setOnClickListener {
@@ -85,33 +85,13 @@ class ShoppingItemAdapter(var context: Context) :
                 }
             }
 
-//            val categoriesAdapter = ArrayAdapter.createFromResource(
-//                context,
-//                R.array.categories_array,
-//                android.R.layout.simple_spinner_item
-//            )
-//            categoriesAdapter.setDropDownViewResource(
-//                android.R.layout.simple_spinner_dropdown_item)
-//            binding.spinnerCategories.adapter = categoriesAdapter
-//
-//            binding.spinnerCategories.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//                    Toast.makeText(context,
-//                        binding.spinnerCategories.selectedItem.toString(), Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onNothingSelected(p0: AdapterView<*>?) {
-//
-//                }
-//            }
-//
-//            if (binding.spinnerCategories.selectedItem.toString() == "Food") {
-//                binding.ivCategoryIcon.setImageResource(R.drawable.food)
-//            } else if (binding.spinnerCategories.selectedItem.toString() == "Beverage"){
-//                binding.ivCategoryIcon.setImageResource(R.drawable.drink)
-//            } else {
-//                binding.ivCategoryIcon.setImageResource(R.drawable.clothing)
-//            }
+            if (binding.tvCategory.toString() == "Food") {
+                binding.ivCategoryIcon.setImageResource(R.drawable.food)
+            } else if (binding.tvCategory.toString() == "Beverage"){
+                binding.ivCategoryIcon.setImageResource(R.drawable.drink)
+            } else {
+                binding.ivCategoryIcon.setImageResource(R.drawable.clothing)
+            }
         }
     }
 

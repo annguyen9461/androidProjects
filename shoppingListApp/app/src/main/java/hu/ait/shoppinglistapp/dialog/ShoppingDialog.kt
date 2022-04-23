@@ -38,6 +38,7 @@ class ShoppingDialog : DialogFragment() {
     private var isEditMode = false
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
         val dialogBuilder = AlertDialog.Builder(requireContext())
 
         // Are we in edit mode? - Have we received a ShoppingItem object to edit?

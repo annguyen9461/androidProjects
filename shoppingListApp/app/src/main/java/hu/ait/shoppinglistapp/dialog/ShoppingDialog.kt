@@ -72,43 +72,41 @@ class ShoppingDialog : DialogFragment() {
         }
 
         dialogBuilder.setPositiveButton("Ok") { dialog, which ->
-            try {
-                if (binding.etShoppingItemName.text.isNotEmpty()
-                    && binding.etShoppingItemPrice.text.isNotEmpty()
-                ) {
-                    if (isEditMode) {
-                        val shoppingToEdit =
-                            (requireArguments().getSerializable(
-                                ScrollingActivity.KEY_SHOPPING_EDIT
-                            ) as ShoppingItem).copy(
-                                name = binding.etShoppingItemName.text.toString(),
-                                price = binding.etShoppingItemPrice.text.toString(),
-                                description = binding.etShoppingItemDescription.text.toString(),
-                                category = binding.spinnerCategories.selectedItem.toString(),
-                                isBought = binding.cbShoppingItemBought.isChecked
-                            )
-
-                        shoppingHandler.updateShopping(shoppingToEdit)
-                    } else {
-                        shoppingHandler.shoppingItemCreated(
-                            ShoppingItem(
-                                null,
-                                binding.etShoppingItemName.text.toString(),
-                                binding.etShoppingItemPrice.text.toString(),
-                                binding.etShoppingItemDescription.text.toString(),
-                                binding.spinnerCategories.selectedItem.toString(),
-                                binding.cbShoppingItemBought.isChecked
-                            )
+            if (binding.etShoppingItemName.text.isEmpty()
+                || binding.etShoppingItemPrice.text.isEmpty()
+            ) {
+                binding.etShoppingItemName.error = "This field can not be empty"
+                binding.etShoppingItemPrice.error = "This field can not be empty"
+                Toast.makeText(context, "Name and Price cannot be empty",
+                    Toast.LENGTH_LONG).show()
+            } else {
+                if (isEditMode) {
+                    val shoppingToEdit =
+                        (requireArguments().getSerializable(
+                            ScrollingActivity.KEY_SHOPPING_EDIT
+                        ) as ShoppingItem).copy(
+                            name = binding.etShoppingItemName.text.toString(),
+                            price = binding.etShoppingItemPrice.text.toString(),
+                            description = binding.etShoppingItemDescription.text.toString(),
+                            category = binding.spinnerCategories.selectedItem.toString(),
+                            isBought = binding.cbShoppingItemBought.isChecked
                         )
-                    }
+
+                    shoppingHandler.updateShopping(shoppingToEdit)
                 } else {
-                    binding.etShoppingItemName.error = "This field can not be empty"
-                    binding.etShoppingItemPrice.error = "This field can not be empty"
+                    shoppingHandler.shoppingItemCreated(
+                        ShoppingItem(
+                            null,
+                            binding.etShoppingItemName.text.toString(),
+                            binding.etShoppingItemPrice.text.toString(),
+                            binding.etShoppingItemDescription.text.toString(),
+                            binding.spinnerCategories.selectedItem.toString(),
+                            binding.cbShoppingItemBought.isChecked
+                        )
+                    )
                 }
-            } catch (e: Exception) {
-                binding.etShoppingItemName.error = "Error: ${e.message}"
-                binding.etShoppingItemPrice.error = "Error: ${e.message}"
             }
+
         }
         dialogBuilder.setNegativeButton("Cancel") { dialog, which ->
         }

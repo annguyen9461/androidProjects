@@ -85,9 +85,9 @@ class ShoppingItemAdapter(var context: Context) :
                 }
             }
 
-            if (binding.tvCategory.toString() == "Food") {
+            if (binding.tvCategory.text.toString() == "Food") {
                 binding.ivCategoryIcon.setImageResource(R.drawable.food)
-            } else if (binding.tvCategory.toString() == "Beverage"){
+            } else if (binding.tvCategory.text.toString() == "Beverage"){
                 binding.ivCategoryIcon.setImageResource(R.drawable.drink)
             } else {
                 binding.ivCategoryIcon.setImageResource(R.drawable.clothing)

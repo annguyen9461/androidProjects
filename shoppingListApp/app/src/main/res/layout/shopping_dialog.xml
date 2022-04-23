@@ -6,14 +6,14 @@
 
     <EditText
         android:id="@+id/etShoppingItemName"
-        android:hint="Enter item name here"
+        android:hint="Item name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/etShoppingItemPrice"
         android:inputType="number"
-        android:hint="Enter item price here"
+        android:hint="Estimated price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -25,7 +25,7 @@
 
     <EditText
         android:id="@+id/etShoppingItemDescription"
-        android:hint="Enter item description here"
+        android:hint="Item description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

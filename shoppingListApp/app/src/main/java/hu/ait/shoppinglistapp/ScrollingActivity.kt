@@ -23,6 +23,7 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
 
     companion object {
         const val KEY_SHOPPING_EDIT = "KEY_SHOPPING_EDIT"
+        const val KEY_DETAILS_EDIT = "KEY_DETAILS_EDIT"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +61,16 @@ class ScrollingActivity : AppCompatActivity(), ShoppingDialog.ShoppingHandler {
 
         val bundle = Bundle()
         bundle.putSerializable(KEY_SHOPPING_EDIT, shoppingToEdit)
+        dialog.arguments = bundle
+
+        dialog.show(supportFragmentManager, "TAG_ITEM_EDIT")
+    }
+
+    fun showDetailsDialog(detailsToShow: ShoppingItem) {
+        val dialog = ShoppingDialog()
+
+        val bundle = Bundle()
+        bundle.putSerializable(KEY_DETAILS_EDIT, detailsToShow)
         dialog.arguments = bundle
 
         dialog.show(supportFragmentManager, "TAG_ITEM_EDIT")

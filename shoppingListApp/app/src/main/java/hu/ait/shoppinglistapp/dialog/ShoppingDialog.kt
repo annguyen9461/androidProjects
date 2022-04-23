@@ -3,10 +3,11 @@ package hu.ait.shoppinglistapp.dialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.widget.CheckBox
-import android.widget.EditText
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import hu.ait.shoppinglistapp.R
 import hu.ait.shoppinglistapp.ScrollingActivity
 import hu.ait.shoppinglistapp.data.ShoppingItem
 import hu.ait.shoppinglistapp.databinding.ShoppingDialogBinding
@@ -66,7 +67,7 @@ class ShoppingDialog : DialogFragment() {
             binding.etShoppingItemName.setText(shoppingToEdit.name)
             binding.etShoppingItemPrice.setText(shoppingToEdit.price)
             binding.etShoppingItemDescription.setText(shoppingToEdit.description)
-            binding.etShoppingItemCategory.setText(shoppingToEdit.category)
+//            binding.spinnerCategories.setText(shoppingToEdit.category)
             binding.cbShoppingItemBought.isChecked = shoppingToEdit.isBought
         }
 
@@ -79,7 +80,7 @@ class ShoppingDialog : DialogFragment() {
                         name = binding.etShoppingItemName.text.toString(),
                         price = binding.etShoppingItemPrice.text.toString(),
                         description = binding.etShoppingItemDescription.text.toString(),
-                        category = binding.etShoppingItemCategory.text.toString(),
+                        category = binding.spinnerCategories.selectedItem.toString(),
                         isBought = binding.cbShoppingItemBought.isChecked
                     )
 
@@ -91,13 +92,37 @@ class ShoppingDialog : DialogFragment() {
                         binding.etShoppingItemName.text.toString(),
                         binding.etShoppingItemPrice.text.toString(),
                         binding.etShoppingItemDescription.text.toString(),
-                        binding.etShoppingItemCategory.text.toString(),
+                        binding.spinnerCategories.selectedItem.toString(),
                         binding.cbShoppingItemBought.isChecked
                     )
                 )
             }
         }
         dialogBuilder.setNegativeButton("Cancel") { dialog, which ->
+        }
+
+        val categoriesAdapter = context?.let {
+            ArrayAdapter.createFromResource(
+                it,
+                R.array.categories_array,
+                android.R.layout.simple_spinner_item
+            )
+        }
+        if (categoriesAdapter != null) {
+            categoriesAdapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item)
+        }
+        binding.spinnerCategories.adapter = categoriesAdapter
+
+        binding.spinnerCategories.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                Toast.makeText(context,
+                    binding.spinnerCategories.selectedItem.toString(), Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
         }
 
         return dialogBuilder.create()

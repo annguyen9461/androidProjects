@@ -72,30 +72,42 @@ class ShoppingDialog : DialogFragment() {
         }
 
         dialogBuilder.setPositiveButton("Ok") { dialog, which ->
-            if (isEditMode) {
-                val shoppingToEdit =
-                    (requireArguments().getSerializable(
-                        ScrollingActivity.KEY_SHOPPING_EDIT
-                    ) as ShoppingItem).copy(
-                        name = binding.etShoppingItemName.text.toString(),
-                        price = binding.etShoppingItemPrice.text.toString(),
-                        description = binding.etShoppingItemDescription.text.toString(),
-                        category = binding.spinnerCategories.selectedItem.toString(),
-                        isBought = binding.cbShoppingItemBought.isChecked
-                    )
+            try {
+                if (binding.etShoppingItemName.text.isNotEmpty()
+                    && binding.etShoppingItemPrice.text.isNotEmpty()
+                ) {
+                    if (isEditMode) {
+                        val shoppingToEdit =
+                            (requireArguments().getSerializable(
+                                ScrollingActivity.KEY_SHOPPING_EDIT
+                            ) as ShoppingItem).copy(
+                                name = binding.etShoppingItemName.text.toString(),
+                                price = binding.etShoppingItemPrice.text.toString(),
+                                description = binding.etShoppingItemDescription.text.toString(),
+                                category = binding.spinnerCategories.selectedItem.toString(),
+                                isBought = binding.cbShoppingItemBought.isChecked
+                            )
 
-                shoppingHandler.updateShopping(shoppingToEdit)
-            } else {
-                shoppingHandler.shoppingItemCreated(
-                    ShoppingItem(
-                        null,
-                        binding.etShoppingItemName.text.toString(),
-                        binding.etShoppingItemPrice.text.toString(),
-                        binding.etShoppingItemDescription.text.toString(),
-                        binding.spinnerCategories.selectedItem.toString(),
-                        binding.cbShoppingItemBought.isChecked
-                    )
-                )
+                        shoppingHandler.updateShopping(shoppingToEdit)
+                    } else {
+                        shoppingHandler.shoppingItemCreated(
+                            ShoppingItem(
+                                null,
+                                binding.etShoppingItemName.text.toString(),
+                                binding.etShoppingItemPrice.text.toString(),
+                                binding.etShoppingItemDescription.text.toString(),
+                                binding.spinnerCategories.selectedItem.toString(),
+                                binding.cbShoppingItemBought.isChecked
+                            )
+                        )
+                    }
+                } else {
+                    binding.etShoppingItemName.error = "This field can not be empty"
+                    binding.etShoppingItemPrice.error = "This field can not be empty"
+                }
+            } catch (e: Exception) {
+                binding.etShoppingItemName.error = "Error: ${e.message}"
+                binding.etShoppingItemPrice.error = "Error: ${e.message}"
             }
         }
         dialogBuilder.setNegativeButton("Cancel") { dialog, which ->
@@ -110,20 +122,24 @@ class ShoppingDialog : DialogFragment() {
         }
         if (categoriesAdapter != null) {
             categoriesAdapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item)
+                android.R.layout.simple_spinner_dropdown_item
+            )
         }
         binding.spinnerCategories.adapter = categoriesAdapter
 
-        binding.spinnerCategories.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                Toast.makeText(context,
-                    binding.spinnerCategories.selectedItem.toString(), Toast.LENGTH_SHORT).show()
-            }
+        binding.spinnerCategories.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    Toast.makeText(
+                        context,
+                        binding.spinnerCategories.selectedItem.toString(), Toast.LENGTH_SHORT
+                    ).show()
+                }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+                override fun onNothingSelected(p0: AdapterView<*>?) {
 
+                }
             }
-        }
 
         return dialogBuilder.create()
     }

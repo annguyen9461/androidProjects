@@ -63,6 +63,9 @@ class ShoppingItemAdapter(var context: Context) :
             }
 
             binding.btnDetails.setOnClickListener {
+                (context as ScrollingActivity).showDetailsDialog(
+                    getItem(this.adapterPosition)
+                )
             }
 
             binding.cbBought.setOnClickListener {

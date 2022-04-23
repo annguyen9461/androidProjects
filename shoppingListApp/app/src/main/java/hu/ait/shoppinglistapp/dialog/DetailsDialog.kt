@@ -16,7 +16,7 @@ import hu.ait.shoppinglistapp.databinding.ShoppingDialogBinding
 class DetailsDialog : DialogFragment() {
 
     interface DetailsHandler {
-        fun updateShopping(shoppingItem: ShoppingItem)
+        fun showItemDetails(shoppingItem: ShoppingItem)
     }
 
     lateinit var detailsHandler: DetailsHandler
@@ -38,12 +38,12 @@ class DetailsDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         val dialogBuilder = AlertDialog.Builder(requireContext())
-
+        dialogBuilder.setTitle("Item Details")
         binding = DetailsDialogBinding.inflate(requireActivity().layoutInflater)
         dialogBuilder.setView(binding.root)
 
         dialogBuilder.setPositiveButton("Ok") { dialog, which ->
-            detailsHandler.updateShopping(
+            detailsHandler.showItemDetails(
                 ShoppingItem(
                     null,
                     binding.tvName.text.toString(),

@@ -30,6 +30,11 @@ class DetailsDialog : DialogFragment() {
                 ScrollingActivity.KEY_DETAILS
             ) as ShoppingItem
 
+        dialogBuilder.setTitle(detailsToShow.name.toString()
+                + " " +detailsToShow.price
+                + " " +detailsToShow.category
+                + " " +detailsToShow.description)
+
         dialogBuilder.setPositiveButton("Ok") { dialog, which ->
             binding.tvName.setText(detailsToShow.name)
             binding.tvPrice.setText(detailsToShow.price)

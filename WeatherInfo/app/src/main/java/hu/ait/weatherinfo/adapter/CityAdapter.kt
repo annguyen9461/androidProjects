@@ -30,6 +30,11 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder> {
         notifyItemInserted(cityItems.lastIndex) // refreshes the recyclerview only where the new item was added
     }
 
+    fun deleteItem(idx: Int) {
+        cityItems.removeAt(idx)
+        notifyItemRemoved(idx)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val cityBinding = CityRowBinding.inflate(LayoutInflater.from(context),
             parent, false)
@@ -44,7 +49,12 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder> {
     inner class ViewHolder(var binding: CityRowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(city: City) {
             binding.tvCityName.text = city.cityName
+
+            binding.btnDelete.setOnClickListener {
+                deleteItem(this.adapterPosition)
+            }
         }
+
     }
 
 }

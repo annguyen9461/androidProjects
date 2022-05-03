@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import hu.ait.weatherinfo.adapter.CityAdapter
 import hu.ait.weatherinfo.databinding.ActivityScrollingBinding
 
 class ScrollingActivity : AppCompatActivity() {
@@ -25,6 +26,7 @@ class ScrollingActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+        binding.recyclerCity.adapter = CityAdapter(this)
     }
 
 }

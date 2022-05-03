@@ -25,6 +25,11 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder> {
         return cityItems.size
     }
 
+    fun addCity(newCity: City) {
+        cityItems.add(newCity)
+        notifyItemInserted(cityItems.lastIndex) // refreshes the recyclerview only where the new item was added
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val cityBinding = CityRowBinding.inflate(LayoutInflater.from(context),
             parent, false)

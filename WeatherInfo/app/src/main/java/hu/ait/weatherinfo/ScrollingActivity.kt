@@ -8,11 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import hu.ait.weatherinfo.adapter.CityAdapter
+import hu.ait.weatherinfo.data.City
 import hu.ait.weatherinfo.databinding.ActivityScrollingBinding
+import hu.ait.weatherinfo.dialog.CityDialog
 
-class ScrollingActivity : AppCompatActivity() {
+class ScrollingActivity : AppCompatActivity(), CityDialog.CityHandler {
 
     private lateinit var binding: ActivityScrollingBinding
+    private lateinit var adapter: CityAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +26,16 @@ class ScrollingActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+//            adapter.addCity(City("Demo"))
+            CityDialog().show(supportFragmentManager,"CITY_DIALOG")
         }
-        binding.recyclerCity.adapter = CityAdapter(this)
+
+        adapter = CityAdapter(this)
+        binding.recyclerCity.adapter = adapter
+    }
+
+    override fun cityCreated(city: City) {
+        adapter.addCity(city)
     }
 
 }

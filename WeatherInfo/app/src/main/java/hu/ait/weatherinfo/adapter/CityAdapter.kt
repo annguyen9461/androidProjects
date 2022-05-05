@@ -15,6 +15,11 @@ import hu.ait.weatherinfo.data.City
 import hu.ait.weatherinfo.databinding.CityRowBinding
 
 class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder> {
+
+    companion object {
+        const val KEY_DATA = "KEY_DATA"
+    }
+
     var cityItems = mutableListOf<City>(
         City("New York"),
         City("Budapest")
@@ -60,10 +65,11 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
             binding.btnDetails.setOnClickListener {
                 val intentDetails = Intent()
+                intentDetails.putExtra(KEY_DATA,
+                    binding.tvCityName.text.toString())
                 val context = (context as ScrollingActivity)
                 intentDetails.setClass(context,
                     DetailsActivity::class.java)
-
                 context.startActivity(intentDetails)
             }
         }

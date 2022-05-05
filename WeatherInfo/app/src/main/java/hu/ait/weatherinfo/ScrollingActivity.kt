@@ -28,7 +28,7 @@ class ScrollingActivity : AppCompatActivity(), CityDialog.CityHandler {
         binding.fab.setOnClickListener { view ->
 //            adapter.addCity(City("Demo"))
             CityDialog().show(supportFragmentManager,"CITY_DIALOG")
-        } 
+        }
 
         adapter = CityAdapter(this)
         binding.recyclerCity.adapter = adapter

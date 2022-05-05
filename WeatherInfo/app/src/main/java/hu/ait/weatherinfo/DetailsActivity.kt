@@ -33,8 +33,9 @@ class DetailsActivity : AppCompatActivity() {
         var retrofit = Retrofit.Builder().baseUrl("https://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create()).build()
         var weatherAPI = retrofit.create(WeatherAPI::class.java)
+        val city= intent.getStringExtra(CityAdapter.KEY_DATA)
         val call = weatherAPI.getWeather(
-            CityAdapter.KEY_DATA.toString(), "metric",
+            city!!, "metric",
             "2088bdc192793c41c32439e751b185a2"
         )
         call.enqueue(object : Callback<CityWeather> {

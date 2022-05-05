@@ -2,6 +2,7 @@ package hu.ait.weatherinfo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import hu.ait.weatherinfo.adapter.CityAdapter
 import hu.ait.weatherinfo.data.CityWeather
 import hu.ait.weatherinfo.databinding.ActivityDetailsBinding
@@ -11,7 +12,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 class DetailsActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityDetailsBinding
@@ -40,14 +40,19 @@ class DetailsActivity : AppCompatActivity() {
         )
         call.enqueue(object : Callback<CityWeather> {
             override fun onResponse(call: Call<CityWeather>, response: Response<CityWeather>) {
-                binding.tvTemp.text = "${response.body()!!.main!!.temp}" + " degree."
+                binding.tvDetails.text = "coordinates: ${response.body()!!.coord!!.lon}" + ", ${response.body()!!.coord!!.lat}\n"+"temperature: ${response.body()!!.main!!.temp}" + " degrees Celcius\n" + "feels like: ${response.body()!!.main!!.feels_like}"+ " degrees Celcius\n"
+                Glide.with(this@DetailsActivity) .load(
+                    ("https://openweathermap.org/img/w/" + response.body()?.weather?.get(0)?.icon + ".png"))
+                    .into(binding.ivWeather)
             }
 
             override fun onFailure(call: Call<CityWeather>, t: Throwable) {
-                binding.tvTemp.text = "Error: ${t.message}"
+                binding.tvDetails.text = "Error: ${t.message}"
             }
         })
 
 
     }
+
 }
+

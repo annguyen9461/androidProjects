@@ -36,7 +36,6 @@ class CityDialog : DialogFragment(){
         dialogBuilder.setTitle("City name")
         binding = CityDialogBinding.inflate(requireActivity().layoutInflater)
         dialogBuilder.setView(binding.root)
-
         dialogBuilder.setPositiveButton("Ok") {
                 dialog, which ->
 

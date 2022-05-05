@@ -1,12 +1,16 @@
 package hu.ait.weatherinfo.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import hu.ait.weatherinfo.DetailsActivity
 import hu.ait.weatherinfo.R
+import hu.ait.weatherinfo.ScrollingActivity
 import hu.ait.weatherinfo.data.City
 import hu.ait.weatherinfo.databinding.CityRowBinding
 
@@ -52,6 +56,15 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
             binding.btnDelete.setOnClickListener {
                 deleteItem(this.adapterPosition)
+            }
+
+            binding.btnDetails.setOnClickListener {
+                val intentDetails = Intent()
+                val context = (context as ScrollingActivity)
+                intentDetails.setClass(context,
+                    DetailsActivity::class.java)
+
+                context.startActivity(intentDetails)
             }
         }
 

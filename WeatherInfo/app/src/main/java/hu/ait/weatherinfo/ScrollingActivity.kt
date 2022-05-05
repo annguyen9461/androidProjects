@@ -9,8 +9,12 @@ import android.view.Menu
 import android.view.MenuItem
 import hu.ait.weatherinfo.adapter.CityAdapter
 import hu.ait.weatherinfo.data.City
+import hu.ait.weatherinfo.data.CityWeather
 import hu.ait.weatherinfo.databinding.ActivityScrollingBinding
 import hu.ait.weatherinfo.dialog.CityDialog
+import hu.ait.weatherinfo.network.WeatherAPI
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ScrollingActivity : AppCompatActivity(), CityDialog.CityHandler {
 

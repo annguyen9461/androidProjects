@@ -46,11 +46,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.btnSatellite.setOnClickListener {
             mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
         }
+
         mMap.isTrafficEnabled = true
+        mMap.uiSettings.isCompassEnabled = true
+        mMap.uiSettings.isMapToolbarEnabled = true
+
+        mMap.setOnMapClickListener {
+            val marker = mMap.addMarker(
+                MarkerOptions()
+                    .position(it)
+                    .title("Demo")
+                    .snippet("Demo text")
+            )
+            marker!!.isDraggable = true
+        }
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+//        val sydney = LatLng(-34.0, 151.0)
+//        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 }

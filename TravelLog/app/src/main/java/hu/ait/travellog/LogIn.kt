@@ -2,6 +2,9 @@ package hu.ait.travellog
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import hu.ait.travellog.databinding.ActivityLogInBinding
 
 class LogIn : AppCompatActivity() {
@@ -24,7 +27,7 @@ class LogIn : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(
             binding.etEmail.text.toString(), binding.etPassword.text.toString()
         ).addOnSuccessListener {
-            Toast.makeText(this@MainActivity,
+            Toast.makeText(this@LogIn,
                 "Login OK",
                 Toast.LENGTH_LONG).show()
 
@@ -32,7 +35,7 @@ class LogIn : AppCompatActivity() {
             //startActivity(Intent(this, ForumActivity::class.java))
 
         }.addOnFailureListener{
-            Toast.makeText(this@MainActivity,
+            Toast.makeText(this@LogIn,
                 "Error: ${it.message}",
                 Toast.LENGTH_LONG).show()
         }
@@ -47,11 +50,11 @@ class LogIn : AppCompatActivity() {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(
             binding.etEmail.text.toString(), binding.etPassword.text.toString()
         ).addOnSuccessListener {
-            Toast.makeText(this@MainActivity,
+            Toast.makeText(this@LogIn,
                 "Registration OK",
                 Toast.LENGTH_LONG).show()
         }.addOnFailureListener{
-            Toast.makeText(this@MainActivity,
+            Toast.makeText(this@LogIn,
                 "Error: ${it.message}",
                 Toast.LENGTH_LONG).show()
         }

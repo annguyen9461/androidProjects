@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import hu.ait.travellog.CreatePostActivity
 import hu.ait.travellog.data.Post
 import hu.ait.travellog.databinding.PostRowBinding
 
@@ -67,7 +68,7 @@ class PostsAdapter : RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
     // when I remove the post object
     private fun removePost(index: Int) {
-        FirebaseFirestore.getInstance().collection("posts").document(
+        FirebaseFirestore.getInstance().collection(CreatePostActivity.POSTS_COLLECTION).document(
             postKeys[index]
         ).delete()
 

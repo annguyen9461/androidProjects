@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "531575348936",
+    "project_id": "travel-log-456f8",
+    "storage_bucket": "travel-log-456f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531575348936:android:5588e7128b3258a54f0ffd",
+        "android_client_info": {
+          "package_name": "hu.ait.travellog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531575348936-8mbhtgtm5hrm8l5pjapukb9276cp2v9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdwK6tl-9ZPp-rvy2a653z_v_vI7j9f58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531575348936-8mbhtgtm5hrm8l5pjapukb9276cp2v9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

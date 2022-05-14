@@ -21,10 +21,10 @@ class CreatePostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreatePostBinding.inflate(layoutInflater)
         setContentView(binding.root)
-    }
 
-    fun sendClick(v: View) {
-        uploadPost()
+        binding.btnSend.setOnClickListener {
+            uploadPost()
+        }
     }
 
     fun uploadPost() {

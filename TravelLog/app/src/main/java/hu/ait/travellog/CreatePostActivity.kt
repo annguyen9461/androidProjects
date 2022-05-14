@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.core.View
 import hu.ait.travellog.data.Post
 import hu.ait.travellog.databinding.ActivityCreatePostBinding
 
@@ -20,6 +21,10 @@ class CreatePostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreatePostBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+    fun sendClick(v: View) {
+        uploadPost()
     }
 
     fun uploadPost() {
@@ -48,4 +53,5 @@ class CreatePostActivity : AppCompatActivity() {
 
 
     }
+
 }

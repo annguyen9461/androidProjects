@@ -1,5 +1,6 @@
 package hu.ait.travellog
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -32,7 +33,7 @@ class LogIn : AppCompatActivity() {
                 Toast.LENGTH_LONG).show()
 
             // navigate to other Activity
-            //startActivity(Intent(this, ForumActivity::class.java))
+            startActivity(Intent(this, MarkerDetails::class.java))
 
         }.addOnFailureListener{
             Toast.makeText(this@LogIn,

@@ -14,19 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelLog">
         <activity
+            android:name=".MarkerDetails"
+            android:exported="false"
+            android:label="@string/title_activity_marker_details"
+            android:theme="@style/Theme.TravelLog.NoActionBar" />
+        <activity
             android:name=".LogIn"
-            android:exported="false" />
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-             To get one, follow the directions here:
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
-        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCzRfUexeBFhl4YaW8KOrUeN1ZivTr8o8A" />
@@ -34,13 +35,7 @@
         <activity
             android:name=".MapsActivity"
             android:exported="true"
-            android:label="@string/title_activity_maps">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

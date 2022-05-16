@@ -29,21 +29,20 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = postItems[position]
-        holder.tvDate.text = post.postDate
-        holder.tvPostTitle.text = post.postTitle
-        holder.tvPostText.text = post.postText
+        holder.bind(post)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(
-            R.layout.post_row, parent, false
-        )
-        return ViewHolder(view)
+        val postBinding = PostRowBinding.inflate(LayoutInflater.from(context),
+            parent, false)
+        return ViewHolder(postBinding)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvDate: TextView = itemView.findViewById(R.id.tvDate)
-        val tvPostTitle: TextView = itemView.findViewById(R.id.tvTitle)
-        val tvPostText: TextView = itemView.findViewById(R.id.tvText)
+    inner class ViewHolder(var binding: PostRowBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(post: Post) {
+            binding.tvDate.text = post.postDate
+            binding.tvTitle.text = post.postTitle
+            binding.tvText.text = post.postText
+        }
     }
 }

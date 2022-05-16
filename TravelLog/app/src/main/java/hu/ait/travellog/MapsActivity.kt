@@ -63,7 +63,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 MarkerOptions()
                     .position(it)
             )
-            marker!!.isDraggable = true
+            marker!!.isDraggable = false
         }
 
         // Set a listener for marker click.

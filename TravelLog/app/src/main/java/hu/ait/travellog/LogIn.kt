@@ -33,7 +33,7 @@ class LogIn : AppCompatActivity() {
                 Toast.LENGTH_LONG).show()
 
             // navigate to other Activity
-            startActivity(Intent(this, MarkerDetails::class.java))
+            startActivity(Intent(this, MapsActivity::class.java))
 
         }.addOnFailureListener{
             Toast.makeText(this@LogIn,

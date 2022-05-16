@@ -1,30 +1,26 @@
 package hu.ait.travellog
 
-import android.Manifest
-import android.content.pm.PackageManager
+import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-
-import com.google.android.gms.maps.CameraUpdateFactory
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import hu.ait.travellog.databinding.ActivityMapsBinding
 import java.util.*
 import kotlin.concurrent.thread
-import kotlin.random.Random
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
+    GoogleMap.OnMarkerClickListener,
     MyLocationManager.OnNewLocationAvailable {
 
     private lateinit var mMap: GoogleMap
@@ -44,49 +40,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-        requestNeededPermission()
-    }
-
-    fun requestNeededPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                101
-            )
-        } else {
-            // we have the permission
-            myLocationManager.startLocationMonitoring()
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>, grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            101 -> {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "ACCESS_FINE_LOCATION perm granted", Toast.LENGTH_SHORT)
-                        .show()
-
-                    myLocationManager.startLocationMonitoring()
-                } else {
-                    Toast.makeText(
-                        this,
-                        "ACCESS_FINE_LOCATION perm NOT granted", Toast.LENGTH_SHORT
-                    ).show()
-                }
-                return
-            }
-        }
     }
 
     override fun onStop() {
@@ -101,13 +54,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             MapStyleOptions.loadRawResourceStyle(this,
             R.raw.mapstyle))
 
-        binding.btnNormal.setOnClickListener {
-            mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-        }
-        binding.btnSatellite.setOnClickListener {
-            mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
-        }
-
         mMap.isTrafficEnabled = true
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
@@ -120,11 +66,32 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             marker!!.isDraggable = true
         }
 
+        // Set a listener for marker click.
+        mMap.setOnMarkerClickListener(this);
+    }
 
-        // Add a marker in Sydney and move the camera
-//        val sydney = LatLng(-34.0, 151.0)
-//        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    /** Called when the user clicks a marker.  */
+    override fun onMarkerClick(marker: Marker): Boolean {
+        // Retrieve the data from the marker.
+        var clickCount = marker.tag as Int?
+
+        // Check if a click count was set, then display the click count.
+        if (clickCount != null) {
+            clickCount = clickCount + 1
+            marker.tag = clickCount
+            Toast.makeText(
+                this,
+                marker.title +
+                        " has been clicked " + clickCount + " times.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+//        startActivity(Intent(this, MarkerDetails::class.java))
+
+        // Return false to indicate that we have not consumed the event and that we wish
+        // for the default behavior to occur (which is for the camera to move such that the
+        // marker is centered and for the marker's info window to open, if it has one).
+        return false
     }
 
     override fun onNewLocation(location: Location) {

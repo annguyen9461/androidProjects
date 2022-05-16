@@ -7,7 +7,7 @@ import com.google.android.gms.location.*
 import kotlin.jvm.Throws
 
 class MyLocationManager(context: Context,
-                        private val onNewLocationHandler: OnNewLocationAvailable) {
+    private val onNewLocationHandler: OnNewLocationAvailable) {
 
     interface OnNewLocationAvailable {
         fun onNewLocation(location: Location)

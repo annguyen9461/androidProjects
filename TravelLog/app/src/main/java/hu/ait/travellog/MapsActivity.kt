@@ -72,10 +72,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
     /** Called when the user clicks a marker.  */
     override fun onMarkerClick(marker: Marker): Boolean {
-        val intentNotes = Intent(this, MarkerDetails::class.java)
-        intentNotes.putExtra("KEY_MARKER",marker.title)
+//        val intentNotes = Intent(this, MarkerDetails::class.java)
+//        intentNotes.putExtra("KEY_MARKER",marker.title)
+//
+//        startActivity(intentNotes)
 
-        startActivity(intentNotes)
+        startActivity(Intent(this, MarkerDetails::class.java))
 
         // Return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the

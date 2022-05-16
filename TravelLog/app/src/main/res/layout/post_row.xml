@@ -17,9 +17,10 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvAuthor"
+            android:id="@+id/tvDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvTitle"
@@ -28,16 +29,16 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/tvBody"
+            android:id="@+id/tvText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:id="@+id/ivPhoto"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:scaleType="fitXY"
-            android:visibility="gone"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/ivPhoto"-->
+<!--            android:layout_width="70dp"-->
+<!--            android:layout_height="70dp"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:visibility="gone"/>-->
 
         <Button
             android:id="@+id/btnDelete"

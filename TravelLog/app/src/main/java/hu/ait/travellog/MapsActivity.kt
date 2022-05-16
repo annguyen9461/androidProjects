@@ -72,21 +72,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
     /** Called when the user clicks a marker.  */
     override fun onMarkerClick(marker: Marker): Boolean {
-        // Retrieve the data from the marker.
-        var clickCount = marker.tag as Int?
-
-        // Check if a click count was set, then display the click count.
-        if (clickCount != null) {
-            clickCount = clickCount + 1
-            marker.tag = clickCount
-            Toast.makeText(
-                this,
-                marker.title +
-                        " has been clicked " + clickCount + " times.",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-//        startActivity(Intent(this, MarkerDetails::class.java))
+        startActivity(Intent(this, MarkerDetails::class.java))
 
         // Return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the

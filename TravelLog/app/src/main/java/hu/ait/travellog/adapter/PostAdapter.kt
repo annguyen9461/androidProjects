@@ -67,11 +67,6 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>{
                 deleteItem(this.adapterPosition)
             }
 
-            binding.btnEdit.setOnClickListener {
-                (context as MarkerDetails).showEditDialog(
-                    getItem(this.adapterPosition)
-                )
-            }
         }
     }
 }

@@ -18,12 +18,9 @@ import kotlin.concurrent.thread
 
 class MarkerDetails : AppCompatActivity(), PostDialog.PostHandler {
 
-    companion object {
-        const val KEY_POST_EDIT = "KEY_POST_EDIT"
-    }
-
     private lateinit var binding: ActivityMarkerDetailsBinding
     private lateinit var adapter: PostsAdapter
+    private var listenerReg: ListenerRegistration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,20 +61,5 @@ class MarkerDetails : AppCompatActivity(), PostDialog.PostHandler {
        }
     }
 
-    fun showEditDialog(postToEdit: Post) {
-        val dialog = PostDialog()
-
-        val bundle = Bundle()
-        bundle.putSerializable("KEY_POST_EDIT", postToEdit)
-        dialog.arguments = bundle
-
-        dialog.show(supportFragmentManager, "TAG_ITEM_EDIT")
-    }
-
-    override fun postUpdated(post: Post) {
-        thread {
-            AppDatabase.getInstance(this).postDAO().updatePost(post)
-        }
-    }
 
 }

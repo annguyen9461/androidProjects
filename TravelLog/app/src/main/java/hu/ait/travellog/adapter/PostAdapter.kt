@@ -8,9 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import hu.ait.travellog.CreatePostActivity
+import hu.ait.travellog.MarkerDetails
 import hu.ait.travellog.R
+import hu.ait.travellog.data.AppDatabase
 import hu.ait.travellog.data.Post
 import hu.ait.travellog.databinding.PostRowBinding
+import kotlin.concurrent.thread
 
 class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
@@ -33,8 +36,14 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     }
 
     fun deleteItem(idx: Int) {
-        postItems.removeAt(idx)
-        notifyItemRemoved(idx)
+        thread{
+            AppDatabase.getInstance(context).postDAO().deletePost(postItems[idx])
+
+            (context as MarkerDetails).runOnUiThread {
+                postItems.removeAt(idx)
+                notifyItemRemoved(idx)
+            }
+        }
     }
 
     fun deleteLastItem() {

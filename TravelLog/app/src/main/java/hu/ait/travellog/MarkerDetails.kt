@@ -35,8 +35,20 @@ class MarkerDetails : AppCompatActivity(), PostDialog.PostHandler {
             PostDialog().show(supportFragmentManager,"POST_DIALOG")
         }
 
-        adapter = PostsAdapter(this)
-        binding.recyclerPosts.adapter = adapter
+        initRecyclerView()
+    }
+
+    private fun initRecyclerView() {
+        thread {
+            val postItems = AppDatabase.getInstance(this).postDAO().getAllPosts()
+
+            runOnUiThread {
+                adapter = PostsAdapter(this, postItems)
+                binding.recyclerPosts.adapter = adapter
+            }
+        }
+
+
     }
 
     override fun postCreated(post: Post) {

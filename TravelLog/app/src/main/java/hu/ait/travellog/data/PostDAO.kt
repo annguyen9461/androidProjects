@@ -8,7 +8,7 @@ import androidx.room.Query
 @Dao
 interface PostDAO {
     @Query("SELECT * FROM post")
-    fun getAllGrades(): List<Post>
+    fun getAllPosts(): List<Post>
 
     @Insert
     fun insertPost(post: Post): Long

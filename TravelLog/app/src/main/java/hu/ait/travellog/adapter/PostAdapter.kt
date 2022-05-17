@@ -16,8 +16,10 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
     var postItems = mutableListOf<Post>()
     val context : Context
-    constructor(context: Context) : super() {
+    constructor(context: Context, postList: List<Post>) : super() {
         this.context = context
+
+        postItems.addAll(postList)
     }
 
     override fun getItemCount(): Int {

@@ -16,7 +16,7 @@ import hu.ait.travellog.databinding.ActivityMarkerDetailsBinding
 class MarkerDetails : AppCompatActivity() {
 
     private lateinit var binding: ActivityMarkerDetailsBinding
-    private lateinit var postsAdapter: PostsAdapter
+    private lateinit var adapter: PostsAdapter
     private var listenerReg: ListenerRegistration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,9 +29,11 @@ class MarkerDetails : AppCompatActivity() {
         binding.toolbarLayout.title = title
 
         binding.fab.setOnClickListener {
+            adapter.addPost(Post("17/5/2022","Title 1", "Some text"))
         }
 
-        binding.recyclerPosts.adapter = PostsAdapter(this)
+        adapter = PostsAdapter(this)
+        binding.recyclerPosts.adapter = adapter
     }
 
 

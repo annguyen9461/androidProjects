@@ -27,6 +27,12 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         return postItems.size
     }
 
+    fun addPost(newPost: Post) {
+        postItems.add(newPost)
+        notifyItemInserted(postItems.lastIndex) // refreshes the recyclerview only where the new item was added
+        //notifyDataSetChanged() - redraws the whole recyclerView
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = postItems[position]
         holder.bind(post)

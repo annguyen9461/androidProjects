@@ -46,11 +46,6 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         }
     }
 
-    fun deleteLastItem() {
-        postItems.removeLast()
-        notifyItemRemoved(postItems.lastIndex+1)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val postBinding = PostRowBinding.inflate(LayoutInflater.from(context),
             parent, false)
@@ -72,6 +67,11 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>{
                 deleteItem(this.adapterPosition)
             }
 
+            binding.btnEdit.setOnClickListener {
+                (context as MarkerDetails).showEditDialog(
+                    getItem(this.adapterPosition)
+                )
+            }
         }
     }
 }

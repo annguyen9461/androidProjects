@@ -1,9 +1,6 @@
 package hu.ait.travellog.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface PostDAO {
@@ -16,4 +13,6 @@ interface PostDAO {
     @Delete
     fun deletePost(post: Post)
 
+    @Update
+    fun updatePost(post: Post)
 }

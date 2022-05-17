@@ -82,7 +82,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         // Return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the
         // marker is centered and for the marker's info window to open, if it has one).
-        return false
+        return true
     }
 
     override fun onNewLocation(location: Location) {
@@ -95,12 +95,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                     "${addrs[0].getAddressLine(0)}, ${addrs[0].getAddressLine(1)}"
 
                 runOnUiThread {
-                    mMap.addMarker(
+                    var marker = mMap.addMarker(
                         MarkerOptions()
                             .position(LatLng(location.latitude, location.longitude))
                             .title(addr)
                             .snippet(addr)
                     )
+                    marker!!.showInfoWindow();
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

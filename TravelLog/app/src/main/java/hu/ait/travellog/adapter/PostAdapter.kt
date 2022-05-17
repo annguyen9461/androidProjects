@@ -14,10 +14,7 @@ import hu.ait.travellog.databinding.PostRowBinding
 
 class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
-    var postItems = mutableListOf<Post>(
-        Post("2018. 09. 10", "Entry 1", "Eat"),
-        Post("2018. 09. 11", "Entry 2", "Drink")
-    )
+    var postItems = mutableListOf<Post>()
     val context : Context
     constructor(context: Context) : super() {
         this.context = context
@@ -33,9 +30,14 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         //notifyDataSetChanged() - redraws the whole recyclerView
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val post = postItems[position]
-        holder.bind(post)
+    fun deleteItem(idx: Int) {
+        postItems.removeAt(idx)
+        notifyItemRemoved(idx)
+    }
+
+    fun deleteLastItem() {
+        postItems.removeLast()
+        notifyItemRemoved(postItems.lastIndex+1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,11 +46,21 @@ class PostsAdapter: RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         return ViewHolder(postBinding)
     }
 
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val post = postItems[position]
+        holder.bind(post)
+    }
+
     inner class ViewHolder(var binding: PostRowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Post) {
-            binding.tvDate.text = post.postDate
             binding.tvTitle.text = post.postTitle
             binding.tvText.text = post.postText
+            binding.tvDate.text = post.postDate
+
+            binding.btnDelete.setOnClickListener {
+                deleteItem(this.adapterPosition)
+            }
+
         }
     }
 }

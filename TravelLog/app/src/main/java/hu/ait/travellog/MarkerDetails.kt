@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import hu.ait.travellog.adapter.PostsAdapter
+import hu.ait.travellog.data.AppDatabase
 import hu.ait.travellog.data.Post
 import hu.ait.travellog.databinding.ActivityMarkerDetailsBinding
 import hu.ait.travellog.dialog.PostDialog
+import kotlin.concurrent.thread
 
 class MarkerDetails : AppCompatActivity(), PostDialog.PostHandler {
 
@@ -30,7 +32,6 @@ class MarkerDetails : AppCompatActivity(), PostDialog.PostHandler {
         binding.toolbarLayout.title = title
 
         binding.fab.setOnClickListener {
-//            adapter.addPost(Post("17/5/2022","Title 1", "Some text"))
             PostDialog().show(supportFragmentManager,"POST_DIALOG")
         }
 
@@ -39,7 +40,19 @@ class MarkerDetails : AppCompatActivity(), PostDialog.PostHandler {
     }
 
     override fun postCreated(post: Post) {
-        adapter.addPost(post)
+       thread {
+           AppDatabase.getInstance(this).postDAO().insertPost(post)
+
+           runOnUiThread {
+               adapter.addPost(post)
+
+               Snackbar.make(binding.root, "Post created",Snackbar.LENGTH_LONG)
+                   .setAction("Undo") {
+                       adapter.deleteLastItem()
+                   }
+                   .show()
+           }
+       }
     }
 
 

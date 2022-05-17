@@ -43,9 +43,10 @@ class PostDialog: DialogFragment() {
 
             postHandler.postCreated(
                 Post(
-                    Date(System.currentTimeMillis()).toString(),
+                    null,
                     binding.etPostTitle.text.toString(),
-                    binding.etPostText.text.toString())
+                    binding.etPostText.text.toString(),
+                    Date(System.currentTimeMillis()).toString())
             )
         }
         dialogBuilder.setNegativeButton("Cancel") {

@@ -12,8 +12,9 @@ import com.google.firebase.firestore.*
 import hu.ait.travellog.adapter.PostsAdapter
 import hu.ait.travellog.data.Post
 import hu.ait.travellog.databinding.ActivityMarkerDetailsBinding
+import hu.ait.travellog.dialog.PostDialog
 
-class MarkerDetails : AppCompatActivity() {
+class MarkerDetails : AppCompatActivity(), PostDialog.PostHandler {
 
     private lateinit var binding: ActivityMarkerDetailsBinding
     private lateinit var adapter: PostsAdapter
@@ -29,11 +30,16 @@ class MarkerDetails : AppCompatActivity() {
         binding.toolbarLayout.title = title
 
         binding.fab.setOnClickListener {
-            adapter.addPost(Post("17/5/2022","Title 1", "Some text"))
+//            adapter.addPost(Post("17/5/2022","Title 1", "Some text"))
+            PostDialog().show(supportFragmentManager,"POST_DIALOG")
         }
 
         adapter = PostsAdapter(this)
         binding.recyclerPosts.adapter = adapter
+    }
+
+    override fun postCreated(post: Post) {
+        adapter.addPost(post)
     }
 
 

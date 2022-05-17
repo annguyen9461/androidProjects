@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/activity_marker_details.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/post_dialog.xml" value="0.12760416666666666" />
         <entry key="app/src/main/res/layout/post_row.xml" value="0.15520833333333334" />
       </map>
     </option>

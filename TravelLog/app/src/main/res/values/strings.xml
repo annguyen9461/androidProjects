@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TravelLog</string>
+    <string name="app_name">WanderLog</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_marker_details">MarkerDetails</string>
     <string name="large_text">

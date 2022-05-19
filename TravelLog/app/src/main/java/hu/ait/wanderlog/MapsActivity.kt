@@ -66,24 +66,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             marker!!.isDraggable = false
         }
 
-        val budapest = LatLng(47.4979,19.0402)
-        mMap.addMarker(
+        val budapestLoc = LatLng(47.4979,19.0402)
+        val budapest = mMap.addMarker(
             MarkerOptions()
-                .position(budapest)
+                .position(budapestLoc)
                 .title("Budapest")
         )
 
-        val vienna = LatLng(48.2082,16.3738)
-        mMap.addMarker(
+        val viennaLoc = LatLng(48.2082,16.3738)
+        val vienna = mMap.addMarker(
             MarkerOptions()
-                .position(vienna)
+                .position(viennaLoc)
                 .title("Vienna")
         )
 
-        val venice = LatLng(45.4408,12.3155)
-        mMap.addMarker(
+        val veniceLoc = LatLng(45.4408,12.3155)
+        val venice = mMap.addMarker(
             MarkerOptions()
-                .position(venice)
+                .position(veniceLoc)
                 .title("Venice")
         )
 

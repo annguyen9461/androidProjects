@@ -38,11 +38,12 @@
 
         <TextView
             android:id="@+id/tvText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             card_view:layout_constraintBottom_toTopOf="@+id/guideline10"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="@+id/guideline3" />
+            card_view:layout_constraintStart_toStartOf="@+id/guideline3"
+            />
 
         <TextView
             android:id="@+id/tvDate"

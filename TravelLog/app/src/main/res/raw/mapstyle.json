@@ -1,46 +1,22 @@
 [
   {
     "featureType": "all",
-    "elementType": "labels.text.fill",
+    "elementType": "labels",
     "stylers": [
       {
-        "color": "#ffffff"
+        "visibility": "off"
+      },
+      {
+        "color": "#f49f53"
       }
     ]
   },
   {
     "featureType": "all",
-    "elementType": "labels.text.stroke",
+    "elementType": "labels.text",
     "stylers": [
       {
-        "color": "#000000"
-      },
-      {
-        "lightness": 13
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#000000"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#144b53"
-      },
-      {
-        "lightness": 14
-      },
-      {
-        "weight": 1.4
+        "visibility": "simplified"
       }
     ]
   },
@@ -49,58 +25,112 @@
     "elementType": "all",
     "stylers": [
       {
-        "color": "#08304b"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#0c4152"
+        "color": "#f9ddc5"
       },
       {
-        "lightness": 5
+        "lightness": -7
       }
     ]
   },
   {
-    "featureType": "road.highway",
+    "featureType": "poi.business",
+    "elementType": "all",
+    "stylers": [
+      {
+        "color": "#645c20"
+      },
+      {
+        "lightness": 38
+      }
+    ]
+  },
+  {
+    "featureType": "poi.government",
+    "elementType": "all",
+    "stylers": [
+      {
+        "color": "#9e5916"
+      },
+      {
+        "lightness": 46
+      }
+    ]
+  },
+  {
+    "featureType": "poi.medical",
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#000000"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#09ffc3"
+        "color": "#813033"
       },
       {
-        "lightness": 25
+        "lightness": 38
+      },
+      {
+        "visibility": "off"
       }
     ]
   },
   {
-    "featureType": "road.arterial",
+    "featureType": "poi.park",
+    "elementType": "all",
+    "stylers": [
+      {
+        "color": "#645c20"
+      },
+      {
+        "lightness": 39
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "all",
+    "stylers": [
+      {
+        "color": "#a95521"
+      },
+      {
+        "lightness": 35
+      }
+    ]
+  },
+  {
+    "featureType": "poi.sports_complex",
+    "elementType": "all",
+    "stylers": [
+      {
+        "color": "#9e5916"
+      },
+      {
+        "lightness": 32
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "all",
+    "stylers": [
+      {
+        "color": "#813033"
+      },
+      {
+        "lightness": 43
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#000000"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "geometry.stroke",
-    "stylers": [
+        "color": "#f19f53"
+      },
       {
-        "color": "#ff09d8"
+        "weight": 1.3
+      },
+      {
+        "visibility": "on"
       },
       {
         "lightness": 16
@@ -109,10 +139,13 @@
   },
   {
     "featureType": "road.local",
-    "elementType": "geometry",
+    "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#000000"
+        "color": "#f19f53"
+      },
+      {
+        "lightness": -10
       }
     ]
   },
@@ -121,7 +154,28 @@
     "elementType": "all",
     "stylers": [
       {
-        "color": "#146474"
+        "lightness": 38
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "all",
+    "stylers": [
+      {
+        "color": "#813033"
+      },
+      {
+        "lightness": 22
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "off"
       }
     ]
   },
@@ -130,7 +184,16 @@
     "elementType": "all",
     "stylers": [
       {
-        "color": "#021019"
+        "color": "#1994bf"
+      },
+      {
+        "saturation": -69
+      },
+      {
+        "gamma": 0.99
+      },
+      {
+        "lightness": 43
       }
     ]
   }

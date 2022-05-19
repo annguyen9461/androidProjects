@@ -20,7 +20,6 @@ class LogIn : AppCompatActivity() {
     fun loginClick(v: View) {
         //throw RuntimeException("Demo exception")
 
-
         if (!isFormValid()){
             return
         }

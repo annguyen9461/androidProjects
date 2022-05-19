@@ -23,9 +23,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreatePostActivity"
-            android:exported="false" />
-        <activity
             android:name=".MarkerDetails"
             android:exported="false"
             android:label="@string/title_activity_marker_details"
@@ -38,10 +35,13 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCzRfUexeBFhl4YaW8KOrUeN1ZivTr8o8A" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name=".MapsActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/title_activity_maps" />
     </application>
 

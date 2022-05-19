@@ -6,55 +6,56 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="10dp"
-    card_view:cardBackgroundColor="#A4F33A0B"
+    card_view:cardBackgroundColor="#F4E9CD"
     card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="4dp"
+    card_view:cardElevation="10dp"
     android:layout_marginBottom="10dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
+        android:gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/ivPhoto"-->
-<!--            android:layout_width="70dp"-->
-<!--            android:layout_height="70dp"-->
-<!--            android:scaleType="fitXY"-->
-<!--            android:visibility="gone"/>-->
+        <ImageView
+            android:id="@+id/ivPhoto"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/paper_map_black"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
 
         <Button
             android:id="@+id/btnDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"/>
+            android:text="Delete" />
 
         <Button
             android:id="@+id/btnEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit"/>
+            android:text="Edit" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

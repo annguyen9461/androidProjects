@@ -66,6 +66,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             marker!!.isDraggable = false
         }
 
+        val budapest = LatLng(47.4979,19.0402)
+        mMap.addMarker(
+            MarkerOptions()
+                .position(budapest)
+                .title("Budapest")
+        )
+
+        val vienna = LatLng(48.2082,16.3738)
+        mMap.addMarker(
+            MarkerOptions()
+                .position(vienna)
+                .title("Vienna")
+        )
+
+        val venice = LatLng(45.4408,12.3155)
+        mMap.addMarker(
+            MarkerOptions()
+                .position(venice)
+                .title("Venice")
+        )
+
+        val sydney = LatLng(-33.852, 151.211)
+        mMap.addMarker(
+            MarkerOptions()
+                .position(sydney)
+                .title("Sydney")
+        )
+
         // Set a listener for marker click.
         mMap.setOnMarkerClickListener(this);
     }

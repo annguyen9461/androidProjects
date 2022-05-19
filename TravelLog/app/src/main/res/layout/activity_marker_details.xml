@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="#021019"
     tools:context=".MarkerDetails">
 
     <com.google.android.material.appbar.AppBarLayout
